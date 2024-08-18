@@ -1,0 +1,17 @@
+.userList {
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem 0.8rem 0.8rem;
+  width: 24rem;
+  height: calc(100% - 3rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: solid var(--user-list-border-color);
+  border-radius: 0.5rem;
+  list-style: none;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-bg-color);
+}

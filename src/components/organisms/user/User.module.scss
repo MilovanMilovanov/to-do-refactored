@@ -1,0 +1,72 @@
+.verticalScrollbar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-bg-color);
+}
+
+.removeScroll {
+  overflow: visible;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-width: 18rem;
+  width: 23rem;
+  border: solid var(--user-border-color);
+  border-radius: 0.5rem;
+
+  .btnPostsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0.8rem 0.5rem 0.8rem;
+
+    &--positionCenter {
+      justify-content: center;
+    }
+
+    button {
+      padding: 0.5rem;
+      text-decoration: none;
+      color: var(--user-posts-link-color);
+      background: var(--user-posts-link-bg-color);
+      border-radius: 0.3rem;
+      border: none;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+        background: var(--user-posts-link-bg-hover-color);
+      }
+    }
+  }
+
+  .revertChanges,
+  .submitChanges {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--user-posts-link-color);
+    background: var(--user-posts-link-bg-color);
+    border-radius: 0.3rem;
+    border: none;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+      background: var(--user-posts-link-bg-hover-color);
+    }
+
+    &:disabled {
+      pointer-events: none;
+      color: var(--user-form-disabled-btn-color);
+      background: var(--user-form-disabled-btn-bg-color);
+    }
+  }
+
+  .labelText {
+    text-align: left;
+  }
+}

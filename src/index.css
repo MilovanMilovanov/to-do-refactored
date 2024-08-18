@@ -1,0 +1,62 @@
+:root {
+  --user-list-border-color: #ffff;
+  --user-border-color: #969393;
+  --user-collapse-arrow-down-color: red;
+  --user-collapse-arrow-up-color: green;
+  --user-form-disabled-btn-bg-color: gray;
+  --user-form-disabled-btn-color: #dadada;
+  --user-form-btn-bg-hover-color: #cacaca;
+  --user-posts-link-color: #ffff;
+  --user-posts-link-bg-color: #414040;
+  --user-posts-link-bg-hover-color: rgb(97, 95, 95);
+  --box-shadow-color: #ffff;
+  --default-white-color: #ffff;
+  --btn-delete-post-bg-color: rgb(199, 6, 6);
+  --btn-delete-post-bg-hover-color: red;
+  --btn-pagination-bg-color: rgb(59, 59, 59);
+  --btn-pagination-bg-hover-color: rgb(82, 81, 81);
+  --scrollbar-thumb-color: rgb(134, 133, 133);
+  --scrollbar-bg-color: rgb(82, 81, 81);
+  --btn-confirmation-popup-bg-color: #222;
+  --confirmation-popup-bg-color: #222;
+  --task-filters-border-color: #555;
+  --task-filters-bg-color: #1d1b1b;
+  --loader-color: cyan;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  place-items: center;
+  text-align: center;
+  min-width: 320px;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background: #242424;
+}
+
+main {
+  width: 100%;
+  height: calc(100vh - 6rem);
+}
+
+button,
+select {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+
+input,
+textarea {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  resize: none;
+}

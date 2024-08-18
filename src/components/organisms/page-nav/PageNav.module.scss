@@ -1,0 +1,36 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .navList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    width: 100%;
+    gap: 2rem;
+    margin-right: 3rem;
+  }
+}
+
+.nav a:link,
+.nav a:visited {
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--default-white-color);
+}
+
+.nav a:global(.active) {
+  color: cyan;
+}
+
+a.ctaLink:link,
+a.ctaLink:visited {
+  padding: 0.2rem 2rem;
+  border-radius: 0.5rem;
+  color: var(--default-white-color);
+}
