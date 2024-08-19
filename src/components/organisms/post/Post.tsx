@@ -48,11 +48,12 @@ function Post(props: PostModel) {
   return (
     <li className={styles.post}>
       <Form
+      className={styles.postForm}
         title="Post Form"
         id={String(props.id)}
         onSubmit={handleSubmit}
         buttons={
-          <>
+          <div className={styles.btnContainer}>
             <Button
               type="reset"
               className={styles.revertChanges}
@@ -68,10 +69,10 @@ function Post(props: PostModel) {
             >
               submit changes
             </Button>
-          </>
+          </div>
         }
       >
-        <Label htmlFor={`title-${formData.title}`}>Title:</Label>
+        <Label htmlFor={`title-${formData.title}`} className={styles.labelText}>Title:</Label>
         <Input
           id={`${`title-${formData.title}`}`}
           value={formData.title}
@@ -80,10 +81,12 @@ function Post(props: PostModel) {
           onChange={handleInputChange}
         />
 
-        <Label htmlFor={`body-${formData.body}`}>Content:</Label>
+        <Label htmlFor={`body-${formData.body}`} className={styles.labelText}>Content:</Label>
         <Textarea
+        className={styles.contentArea}
           id={`body-${formData.body}`}
           value={formData.body}
+          maxHeight={13}
           name="body"
           placeholder="Enter your post"
           onChange={handleInputChange}

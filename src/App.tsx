@@ -57,7 +57,7 @@ function App() {
           <Route path="posts/:id" element={<PostsPage />} />
           <Route path="tasks" element={<TasksPage />} />
         </Routes>
-      </Suspense>
+        </Suspense>
     </BrowserRouter>
   );
 }

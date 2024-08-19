@@ -76,36 +76,33 @@ function User({
 
   return (
     <li
-      className={`${styles.user} 
-      ${isUserLoadedFromPosts && styles.verticalScrollbar}
-       ${className}`}
+      className={`${styles.user} ${className}`}
     >
       <div
-        className={`${styles.btnPostsContainer} ${
-          !isUserLoadedFromPosts && styles["btnPostsContainer--positionCenter"]
+        className={`${styles.btnContainerNavigation} ${
+          !isUserLoadedFromPosts && styles["btnContainerNavigation--positionCenter"]
         }`}
       >
         {isUserLoadedFromPosts ? (
           <>
             <span>{username}</span>
             <Link to="/">
-              <Button>Go back</Button>
+              <Button className={styles.userNavigationButton}>Go back</Button>
             </Link>
           </>
         ) : (
           <Link to={`posts/${id}`}>
-            <Button>{`Go to ${username}'s posts`}</Button>
+            <Button className={styles.userNavigationButton} >{`Go to ${username}'s posts`}</Button>
           </Link>
         )}
       </div>
 
       <Form
         id={id}
-        className={`${isUserLoadedFromPosts && styles.removeScroll}`}
         title="User Form"
         onSubmit={handleSubmit}
         buttons={
-          <>
+          <div className={styles.btnContainer}>
             <Button
               type="reset"
               className={styles.revertChanges}
@@ -121,7 +118,7 @@ function User({
             >
               submit changes
             </Button>
-          </>
+          </div>
         }
       >
         <Label className={styles.labelText} htmlFor={`username-${id}`}>

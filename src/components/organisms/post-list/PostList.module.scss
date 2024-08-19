@@ -14,42 +14,6 @@
     padding: 0;
   }
 
-  .postContainer {
-    display: flex;
-    align-items: start;
-    gap: 0.8rem;
-    margin: 0.8rem 0 0 0;
-  }
-
-  .btnPosts {
-    padding: 0.5rem;
-    text-decoration: none;
-    color: var(--user-posts-link-color);
-    background: var(--user-posts-link-bg-color);
-    border-radius: 0.3rem;
-    border: none;
-
-    &:hover {
-      background: var(--user-posts-link-bg-hover-color);
-    }
-  }
-
-  legend {
-    text-align: center;
-  }
-  label {
-    text-align: left;
-  }
-
-  .newPostform {
-    margin: 0;
-    width: 100%;
-
-    .btnAddPost {
-      margin: 0 auto;
-    }
-  }
-
   .btnExpand {
     display: flex;
     align-items: center;
@@ -57,9 +21,7 @@
     padding: 0.5rem;
     border: solid var(--default-white-color);
     border-radius: 0.5rem;
-    cursor: pointer;
     box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
-    background: green;
 
     &:hover {
       background: var(--user-posts-link-bg-color);
@@ -73,10 +35,26 @@
     }
   }
 
+  .postContainer {
+    box-sizing: border-box;
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  .postForm {
+    margin: 0 auto;
+    width: 100%;
+
+    .labelText {
+        text-align: left;
+    }
+  }
+
   .btnAddPost {
+    margin-top: 0.4rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: none;
     color: var(--user-posts-link-color);
     background: var(--user-posts-link-bg-color);
     border-radius: 0.3rem;
@@ -86,34 +64,23 @@
       opacity: 1;
       background: var(--user-posts-link-bg-hover-color);
     }
-
-    &:disabled {
-      pointer-events: none;
-      color: var(--user-form-disabled-btn-color);
-      background: var(--user-form-disabled-btn-bg-color);
-    }
   }
 
   .btnDelete {
     justify-content: center;
     align-items: center;
-    padding: 0.2rem 0.5rem;
-    height: 2rem;
+    padding: 0.3rem 0.5rem;
+    height: 2.4rem;
     border-radius: 0.3rem;
     color: var(--white-color);
     background: var(--btn-delete-post-bg-color);
-    border: none;
 
     &:hover {
       background: var(--btn-delete-post-bg-hover-color);
     }
   }
-  .labelText {
-    text-align: left;
-  }
 }
-
-.confirmDelePopup {
+.confirmDelete {
   background: var(--confirmation-popup-bg-color);
   text-align: center;
   opacity: 0.9;
@@ -125,16 +92,17 @@
     justify-content: center;
     padding: 0.5rem;
     margin: 0.3rem;
+    opacity: 0.8;
     width: 5rem;
     height: 2rem;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     color: var(--default-white-color);
     background: var(--btn-confirmation-popup-bg-color);
-    border-radius: 0.3rem;
 
     &:hover {
-      opacity: 0.8;
+      opacity: 1;
       font-size: 1.1rem;
+      box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
     }
   }
 }

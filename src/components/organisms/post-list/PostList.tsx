@@ -102,7 +102,7 @@ function PostList() {
       <Popup
         message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
         isOpen={isPopupOpen}
-        className={styles.confirmDelePopup}
+        className={styles.confirmDelete}
         setIsOpen={setIsPopupOpen}
         action={handleDeletePost}
       >
@@ -115,7 +115,7 @@ function PostList() {
           <Form
             id="Add-post-form"
             title="Add Post"
-            className={styles.newPostform}
+            className={styles.postForm}
             onSubmit={handleSubmit}
             buttons={
               <Button type="submit" className={styles.btnAddPost}>
@@ -123,7 +123,7 @@ function PostList() {
               </Button>
             }
           >
-            <Label htmlFor="add-post-title">Title:</Label>
+            <Label htmlFor="add-post-title" className={styles.labelText}>Title:</Label>
             <Input
               id="add-post-title"
               value={formData.title}
@@ -132,8 +132,9 @@ function PostList() {
               required={true}
               onChange={handleInputChange}
             />
-            <Label htmlFor="add-post-body">Content:</Label>
+            <Label htmlFor="add-post-body" className={styles.labelText}>Content:</Label>
             <Textarea
+            className={styles.contentArea}
               id="add-post-body"
               name="body"
               placeholder="Enter your post"
