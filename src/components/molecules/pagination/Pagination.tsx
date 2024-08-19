@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
-import styles from "./Pagination.module.scss";
-
 import Button from "../../atoms/button/Button";
+
+import styles from "./Pagination.module.scss";
 
 interface PaginationModel {
   pageSize: number;
@@ -27,10 +27,9 @@ function Pagination({
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
   return (
-    <section>
-      <div className={styles.tableNavigation}>
+      <section className={styles.navigation}>
         <Button
-          className={styles.paginationBtn}
+          className={styles.prevBtn}
           onClick={decrementPage}
           disabled={currentPage === 1}
         >
@@ -38,14 +37,13 @@ function Pagination({
         </Button>
         <span>Page {currentPage}</span>
         <Button
-          className={styles.paginationBtn}
+          className={styles.nextBtn}
           onClick={incrementPage}
           disabled={currentPage === Math.ceil(tasks.length / pageSize)}
         >
           Next
         </Button>
-      </div>
-    </section>
+      </section>
   );
 }
 

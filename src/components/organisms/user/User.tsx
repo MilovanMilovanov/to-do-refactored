@@ -79,8 +79,8 @@ function User({
       className={`${styles.user} ${isUserLoadedFromPosts && styles['user--showBorder']} ${className}`}
     >
       <div
-        className={`${styles.btnContainerNavigation} ${
-          !isUserLoadedFromPosts && styles["btnContainerNavigation--positionCenter"]
+        className={`${styles.btnContainerNav} ${
+          !isUserLoadedFromPosts && styles["btnContainerNav--positionCenter"]
         }`}
       >
         {isUserLoadedFromPosts ? (
@@ -102,7 +102,7 @@ function User({
         title="User Form"
         onSubmit={handleSubmit}
         buttons={
-          <div className={styles.btnContainer}>
+          <div className={styles.btnContainerForm}>
             <Button
               type="reset"
               className={styles.revertChanges}

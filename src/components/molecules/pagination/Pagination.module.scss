@@ -1,11 +1,11 @@
-.tableNavigation {
+.navigation {
   display: flex;
   justify-content: center;
   gap: 1rem;
   width: 100%;
   margin-top: 0.8rem;
 
-  .paginationBtn {
+  .prevBtn, .nextBtn {
     display: flex;
     align-items: center;
     justify-content: center;
