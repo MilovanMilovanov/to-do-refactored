@@ -1,7 +1,6 @@
+@import "../../../global.scss";
+
 .user {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
   min-width: 18rem;
   width: 23rem;
   border: none;
@@ -17,25 +16,22 @@
 }
 
 .btnContainerNav {
-  display: flex;
-  justify-content: space-between;
+  @include flex-layout($justify: space-between);
   padding: 0.5rem 1rem 0 1rem;
 
   &--positionCenter {
-    justify-content: center;
+    @include flex-layout($justify: center);
   }
 }
 
   .btnContainerForm {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-layout($justify: space-between, $align: center);
     margin-top: 0.5rem;
   }
 
   .revertChanges,
   .submitChanges,
-  .userNavigationButton
+  .userNavnBtn
    {
     padding: 0.5rem;
     border-radius: 0.5rem;

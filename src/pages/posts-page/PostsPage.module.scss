@@ -1,6 +1,6 @@
+@import "../../global.scss";
+
 .postsPageLayout {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+  @include flex-layout($gap: 2rem, $justify: center);
   height: calc(100vh - 5rem);
 }

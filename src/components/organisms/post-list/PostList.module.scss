@@ -1,3 +1,5 @@
+@import "../../../global.scss";
+
 .container {
   overflow-y: auto;
   overflow-x: hidden;
@@ -14,23 +16,18 @@
 }
 
 .postList {
-  display: flex;
-  flex-direction: column;
+  @include flex-layout($gap: 1rem, $direction: column);
   gap: 1rem;
   padding: 0.7rem;
   width: 24rem;
 
 
   .postSection {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+    @include flex-layout($gap: 1rem, $align: flex-start);
   }
 
   .btnExpand {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-layout($justify: space-between, $align: center);
     padding: 0.5rem;
     border: solid var(--default-white-color);
     border-radius: 0.5rem;
@@ -71,8 +68,7 @@
   }
 
   .btnDelete {
-    justify-content: center;
-    align-items: center;
+    @include flex-layout($justify: center, $align: center);
     padding: 0.3rem 0.5rem;
     height: 2.5rem;
     width: 5rem;
@@ -93,9 +89,7 @@
   background: var(--confirmation-popup-content-bg-color);
 
   button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-layout($justify: center, $align: center);
     padding: 0.5rem;
     margin: 0.3rem;
     width: 5rem;

@@ -1,15 +1,12 @@
+@import "../../../global.scss";
+
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-layout( $justify: center, $align: center);
 
   .navList {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  @include flex-layout($gap: 2rem, $justify: center, $align: center);
     list-style: none;
     width: 100%;
-    gap: 2rem;
     margin-right: 3rem;
   }
 }

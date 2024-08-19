@@ -1,11 +1,12 @@
+@import "../../../global.scss";
+
 .container {
   position: relative;
   height: 100%;
   
   .modal {
+    @include flex-layout( $align: center);
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -16,13 +17,10 @@
     background: var(--confirmation-popup-bg-color);
     
     .content {
-      display: flex;
-      flex-direction: column;
+      @include flex-layout($direction: column);
 
       .btnContainer {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
+        @include flex-layout( $gap: 1rem, $justify: center);
       }
     }
   }

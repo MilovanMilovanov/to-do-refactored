@@ -1,14 +1,12 @@
+@import "../../../global.scss";
+
 .navigation {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+  @include flex-layout($gap: 1rem, $justify: center);
   width: 100%;
   margin-top: 0.8rem;
 
   .prevBtn, .nextBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-layout( $justify: center, $align: center);
     padding: 0.5rem;
     width: 5rem;
     height: 2rem;

@@ -1,6 +1,5 @@
+@import "../../../global.scss";
+
 .taskList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  @include flex-layout($direction: column, $justify: center, $align: center);
 }

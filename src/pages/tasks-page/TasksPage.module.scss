@@ -1,5 +1,6 @@
+@import "../../global.scss";
+
 .tasksPageLayout {
-  display: flex;
-  justify-content: center;
+  @include flex-layout( $justify: center);
   height: calc(100vh - 4rem);
 }

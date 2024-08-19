@@ -1,19 +1,19 @@
+@import "../../../global.scss";
+
 .container {
-  display: flex;
-}
+  @include flex-layout($justify: center);
+  width: 100%;
 
   .filtersForm {
     margin: 0;
     width: 100%;
 
     fieldset {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
+      @include flex-layout($direction: row, $gap: 1rem, $justify: center, $align: center);
       border: solid var(--filters-border-color);
       border-bottom: none;
       border-radius: 2rem 2rem 0 0;
+      padding-bottom: 1rem;
       background: var(--filters-bg-color);
 
       .filter {
@@ -35,3 +35,5 @@
       }
     }
   }
+
+}

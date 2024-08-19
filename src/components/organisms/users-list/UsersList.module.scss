@@ -1,8 +1,8 @@
+@import "../../../global.scss";
+
 .userList {
+  @include flex-layout($direction: column, $gap: 1rem);
   box-sizing: content-box;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
   padding: 0.7rem;
   width: 24rem;
   overflow-y: auto;

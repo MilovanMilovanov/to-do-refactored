@@ -27,6 +27,15 @@
   --btn-disabled-bg-color: rgba(128, 128, 128, 0.129);
 }
 
+
+@mixin flex-layout($direction: unset, $gap: 0, $justify: unset, $align: unset) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
 body {
   margin: 0 auto;
   padding: 0;
@@ -53,9 +62,7 @@ form {
   margin: 0.5rem 0.8rem 0.8rem 0.8rem;
 
   fieldset {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+    @include flex-layout($direction: column, $gap: 0.4rem );
     padding: 0.8rem;
     border: solid var(--default-app-border-color);
     border-radius: 0.5rem;
@@ -102,3 +109,5 @@ button, select, input, textarea {
   outline-style: none;
   transition: ease-in-out 0.2s;
 }
+
+

@@ -1,3 +1,5 @@
+@import "../../../global.scss";
+
 .post {
   text-align: center;
   margin-top: 0.9rem;
@@ -21,8 +23,7 @@
   }
 
   .btnContainer {
-    display: flex;
-    justify-content: space-between;
+    @include flex-layout($justify: space-between);
     padding-top: 0.5rem;
 
     .revertChanges,

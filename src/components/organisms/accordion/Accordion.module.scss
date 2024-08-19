@@ -1,11 +1,12 @@
+@import "../../../global.scss";
+
+
 .container {
   width: 100%;
 }
 
 .toggleSection {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flex-layout( $justify: space-between, $align: center);
   padding: 0.7rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);

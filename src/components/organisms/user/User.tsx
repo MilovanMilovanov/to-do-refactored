@@ -15,6 +15,7 @@ import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
 import Button from "../../atoms/button/Button";
 import Label from "../../atoms/label/Label";
+
 import styles from "./User.module.scss";
 
 interface UserComponentModel extends UserModel {
@@ -87,12 +88,12 @@ function User({
           <>
             <span>{username}</span>
             <Link to="/">
-              <Button className={styles.userNavigationButton}>Go back</Button>
+              <Button className={styles.userNavnBtn}>Go back</Button>
             </Link>
           </>
         ) : (
           <Link to={`posts/${id}`}>
-            <Button className={styles.userNavigationButton} >{`Go to ${username}'s posts`}</Button>
+            <Button className={styles.userNavnBtn} >{`Go to ${username}'s posts`}</Button>
           </Link>
         )}
       </div>

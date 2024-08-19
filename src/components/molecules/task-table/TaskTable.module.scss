@@ -1,6 +1,7 @@
+@import "../../../global.scss";
+
 .table {
-  display: flex;
-  flex-direction: column;
+  @include flex-layout( $direction: column);
   overflow: hidden;
   min-width: 40rem;
   width: 50rem;
@@ -34,6 +35,7 @@
     padding: 0.3rem;
     background: var(--btn-pagination-bg-color);
     box-shadow: 0 0.1rem 0.3rem 0 var(--box-shadow-color);
+    z-index: 1;
   }
 
   .tableBody {
@@ -68,9 +70,7 @@
 }
 
 .noFilterMatchContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-layout( $justify: center, $align: center);
   height: calc(100vh - 15rem);
   pointer-events: none;
 
