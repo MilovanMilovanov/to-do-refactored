@@ -4,9 +4,13 @@
   text-align: center;
   min-width: 18rem;
   width: 23rem;
-  border: solid var(--user-border-color);
-  border-radius: 0.5rem;
-
+  border: none;
+  
+  &--showBorder {
+    border: solid var(--list-container-border-color);
+    border-radius: 0.5rem;
+  }
+  
 
 .labelText {
   text-align: left;
@@ -35,15 +39,15 @@
    {
     padding: 0.5rem;
     border-radius: 0.5rem;
-    color: var(--user-posts-link-color);
+    color: var(--btn-default-color);
     background: var(--user-posts-link-bg-color);
     border-radius: 0.3rem;
     border: none;
-    opacity: 0.8;
+  
 
     &:hover {
-      opacity: 1;
-      background: var(--user-posts-link-bg-hover-color);
+      color: var(--default-white-color);
+      background: var(--btn-default-bg-hover-color);
     }
   }
 }

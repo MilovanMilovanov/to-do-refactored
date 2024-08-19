@@ -92,20 +92,21 @@ function PostList() {
     setExpandedItemId(null);
   };
 
+
   return (
-    <section
-      className={`${styles.postList} ${
-        isPopupOpen && styles["postList--removePadding"]
-      }`}
-      style={{ overflowY: isPopupOpen ? "hidden" : "scroll" }}
+    <section className={`${styles.container} ${
+      isPopupOpen && styles["container--removeScroll"]
+    }`}>
+    <Popup
+    message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
+    isOpen={isPopupOpen}
+    className={styles.confirmDialog}
+    setIsOpen={setIsPopupOpen}
+    action={handleDeletePost}
     >
-      <Popup
-        message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
-        isOpen={isPopupOpen}
-        className={styles.confirmDelete}
-        setIsOpen={setIsPopupOpen}
-        action={handleDeletePost}
-      >
+    <div
+      className={styles.postList}
+    >
         <Accordion
           id={"Add-post-form"}
           title="Add New Post"
@@ -125,26 +126,27 @@ function PostList() {
           >
             <Label htmlFor="add-post-title" className={styles.labelText}>Title:</Label>
             <Input
+              name="title"
+              required={true}
               id="add-post-title"
               value={formData.title}
-              name="title"
               placeholder="Enter your title"
-              required={true}
               onChange={handleInputChange}
             />
             <Label htmlFor="add-post-body" className={styles.labelText}>Content:</Label>
             <Textarea
-            className={styles.contentArea}
-              id="add-post-body"
               name="body"
-              placeholder="Enter your post"
+              required={true}
+              id="add-post-body"
               value={formData.body}
+              placeholder="Enter your post"
+              className={styles.contentArea}
               onChange={handleInputChange}
             />
           </Form>
         </Accordion>
         {posts?.map((post) => (
-          <div key={post.id} className={styles.postContainer}>
+          <div key={post.id} className={styles.postSection}>
             <Accordion
               title={String(post.id)}
               isCollapsed={expandedItemId !== String(post.id)}
@@ -162,7 +164,8 @@ function PostList() {
             </Button>
           </div>
         ))}
-      </Popup>
+    </div>
+    </Popup>
     </section>
   );
 }

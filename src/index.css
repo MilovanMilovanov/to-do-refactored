@@ -1,14 +1,10 @@
 :root {
-  --user-list-border-color: #ffff;
-  --user-border-color: #969393;
+  --list-container-border-color: #ffff;
+  --default-app-border-color: #969393;
   --user-collapse-arrow-down-color: red;
   --user-collapse-arrow-up-color: green;
-  --user-form-disabled-btn-bg-color: gray;
-  --user-form-disabled-btn-color: #dadada;
-  --user-form-btn-bg-hover-color: #cacaca;
   --user-posts-link-color: #ffff;
-  --user-posts-link-bg-color: #414040;
-  --user-posts-link-bg-hover-color: rgb(97, 95, 95);
+  --user-posts-link-bg-color: #414040dc;
   --box-shadow-color: #ffff;
   --default-white-color: #ffff;
   --btn-delete-post-bg-color: rgb(199, 6, 6);
@@ -18,10 +14,17 @@
   --scrollbar-thumb-color: rgb(134, 133, 133);
   --scrollbar-bg-color: rgb(82, 81, 81);
   --btn-confirmation-popup-bg-color: #414040;
-  --confirmation-popup-bg-color: #222;
-  --task-filters-border-color: #555;
-  --task-filters-bg-color: #1d1b1b;
+  --confirmation-popup-bg-color: #0c0c0cc9;
+  --confirmation-popup-content-bg-color: #0c0c0c9f;
+  --filters-border-color: #555;
+  --filters-bg-color: #1d1b1b;
+  --filters-focus-bg-color: rgba(0, 255, 255, 0.16);
   --loader-color: cyan;
+  --btn-default-bg-hover-color:rgb(97, 95, 95);
+  --placeholder-text-color:  rgba(255, 255, 255, 0.4);
+  --btn-default-color: rgba(255, 255, 255, 0.6);
+  --btn-disabled-color: rgba(246, 243, 243, 0.459);
+  --btn-disabled-bg-color: rgba(128, 128, 128, 0.129);
 }
 
 body {
@@ -45,17 +48,45 @@ main {
   height: calc(100vh - 6rem);
 }
 
+
+form {
+  margin: 0.5rem 0.8rem 0.8rem 0.8rem;
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.8rem;
+    border: solid var(--default-app-border-color);
+    border-radius: 0.5rem;
+  }
+
+  legend {
+    padding: 0 0.4rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+
 button,
 select {
   cursor: pointer;
   border: none;
 }
 
+li {
+  list-style: none;
+ }
+
 button:disabled {
     pointer-events: none;
-    color: var(--user-form-disabled-btn-color);
-    background: var(--user-form-disabled-btn-bg-color)!important;
+    color: var(--btn-disabled-color)!important;
+    background: var(--btn-disabled-bg-color)!important;
 }
+
+
 
 input,
 textarea {
@@ -68,4 +99,6 @@ textarea {
 
 button, select, input, textarea {
   border-radius: 0.3rem;
+  outline-style: none;
+  transition: ease-in-out 0.2s;
 }

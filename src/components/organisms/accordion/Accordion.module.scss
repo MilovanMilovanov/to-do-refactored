@@ -2,22 +2,24 @@
   width: 100%;
 }
 
-.btnExpand {
+.toggleSection {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.7rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
   cursor: pointer;
 
+  &--expanded {
+    background: var(--user-posts-link-bg-color);
+  }
+  &--closed {
+    background: unset;
+  }
+
   .title {
     letter-spacing: 0.07rem;
-
-    &--fullWidth {
-      width: 100%;
-    }
   }
 
   &:hover {

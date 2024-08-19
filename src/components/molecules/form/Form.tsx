@@ -1,5 +1,4 @@
 import { FormHTMLAttributes, ReactNode } from "react";
-import styles from "./Form.module.scss";
 
 interface FormModel extends FormHTMLAttributes<HTMLFormElement> {
   buttons?: ReactNode;
@@ -14,11 +13,11 @@ function Form({
   onSubmit,
 }: FormModel) {
   return (
-    <form id={id} className={`${styles.form} ${className}`} onSubmit={onSubmit}>
+    <form id={id} className={className} onSubmit={onSubmit}>
       <fieldset>
-        <legend className={styles.title}>{title}</legend>
+        <legend>{title}</legend>
         {children}
-        <div className={styles.buttonContainer}>{buttons}</div>
+        {buttons}
       </fieldset>
     </form>
   );

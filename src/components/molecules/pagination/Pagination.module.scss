@@ -6,16 +6,19 @@
   margin-top: 0.8rem;
 
   .paginationBtn {
-    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
     width: 5rem;
-    opacity: 0.8;
+    height: 2rem;
     border-radius: 0.3rem;
-    color: var(--default-white-color);
-    background: var(--btn-pagination-bg-color);
+    color: var(--btn-default-color);
+    background: var(--btn-confirmation-popup-bg-color);
 
     &:hover {
-      opacity: 1;
-      background: var(--btn-pagination-bg-hover-color);
+      font-size: 1.1rem;
+      color: var(--default-white-color);
       box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
     }
   }

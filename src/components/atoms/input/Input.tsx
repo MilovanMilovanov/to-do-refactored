@@ -19,10 +19,10 @@ function Input({
       type={type}
       name={name}
       value={value}
-      className={className}
-      placeholder={placeholder}
       required={required}
       disabled={disabled}
+      className={className}
+      placeholder={placeholder}
       onChange={onChange}
     />
   );

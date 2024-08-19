@@ -21,7 +21,7 @@ function Accordion({
       <div
         role="button"
         tabIndex={0}
-        className={styles.btnExpand}
+        className={`${styles.toggleSection} ${isCollapsed?styles['toggleSection--closed'] :styles['toggleSection--expanded'] }`}
         aria-expanded={!isCollapsed}
         aria-controls={id}
         onClick={() => toggleElement(id)}

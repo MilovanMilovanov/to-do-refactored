@@ -53,20 +53,20 @@ function TaskFilters(props: FiltersModel) {
   };
 
   return (
-    <section className={styles.filters}>
-      <Form className={styles.form} title="Task Filter">
+    <section className={styles.container}>
+      <Form className={styles.filtersForm} title="Task Filter">
         <Input
           name="title"
           value={title}
           placeholder="Filter by title"
-          className={styles.filterInput}
+          className={styles.filter}
           onChange={handleFilterChange}
         />
         <Select
           name="userId"
-          value={status}
+          value={userId}
           options={userIds}
-          className={styles.filterInput}
+          className={styles.filter}
           filterDefaultText="Filter By Id"
           onChange={handleFilterChange}
         />
@@ -74,7 +74,7 @@ function TaskFilters(props: FiltersModel) {
           name="status"
           value={status}
           options={statusFilterOptions}
-          className={styles.filterInput}
+          className={styles.filter}
           filterDefaultText="Filter By Status"
           onChange={handleFilterChange}
         />

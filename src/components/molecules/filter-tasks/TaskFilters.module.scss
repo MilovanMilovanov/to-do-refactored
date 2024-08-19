@@ -1,39 +1,37 @@
-.filters {
+.container {
   display: flex;
-  justify-content: center;
+}
 
-  .form {
+  .filtersForm {
     margin: 0;
     width: 100%;
-    height: auto;
 
     fieldset {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      margin: 0;
-      padding: 0.5rem 0 0.8rem 0;
-      border: solid var(--task-filters-border-color);
-      border-radius: 2rem 2rem 0 0;
+      gap: 1rem;
+      border: solid var(--filters-border-color);
       border-bottom: none;
-      background: var(--task-filters-bg-color);
+      border-radius: 2rem 2rem 0 0;
+      background: var(--filters-bg-color);
 
-      .filterInput {
+      .filter {
         height: 2rem;
         border-radius: 0.3rem;
-        border: none;
-        outline-style: none;
         color: var(--default-white-color);
         background: var(--btn-pagination-bg-color);
 
+        &:focus-within {
+          background: var(--filters-focus-bg-color);
+        } 
+
         &::placeholder {
-          color: var(--default-white-color);
-          opacity: 0.6;
+          color: var(--placeholder-text-color);
         }
         &:hover {
-          background: var(--user-posts-link-bg-hover-color);
+          background: var(--btn-default-bg-hover-color);
         }
       }
     }
   }
-}

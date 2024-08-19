@@ -76,7 +76,7 @@ function User({
 
   return (
     <li
-      className={`${styles.user} ${className}`}
+      className={`${styles.user} ${isUserLoadedFromPosts && styles['user--showBorder']} ${className}`}
     >
       <div
         className={`${styles.btnContainerNavigation} ${

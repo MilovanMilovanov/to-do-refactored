@@ -8,6 +8,7 @@ function Textarea({
   id,
   name,
   value,
+  required,
   placeholder,
   maxHeight = 10,
   className = "",
@@ -28,6 +29,7 @@ function Textarea({
       name={name}
       value={value}
       ref={textareaRef}
+      required={required}
       className={className}
       placeholder={placeholder}
       style={{ overflowY: "auto", maxHeight: `${maxHeight}rem` }}
