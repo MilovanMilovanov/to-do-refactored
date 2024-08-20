@@ -7,32 +7,11 @@
 
 .toggleSection {
   @include flex-layout( $justify: space-between, $align: center);
-  overflow: hidden;
-  position: relative;
+  @include glass-hover-effect();
   padding: 0.8rem;
-  transition: background 0.3s ease-in-out;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.3rem 0 var(--box-shadow-color-accordion);
   cursor: pointer;
-
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -140%;
-    transition: all 0.4s ease-in-out;
-    transform: skewX(-30deg);
-    width: 200%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.197) 50%, rgba(255, 255, 255, 0) 70%);
-  }
-  
-    &:hover::before {
-      left: 100%;
-      transition: all 0.7s ease-in-out;
-    }
-  
 
   &--expanded {
     background: var(--link-bg-color-user-posts);

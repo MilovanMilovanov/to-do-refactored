@@ -57,6 +57,30 @@
   gap: $gap;
 }
 
+@mixin glass-hover-effect($transition-time: 0.4s, $hover-time: 0.7s, $skew-angle: -30deg, $start-color: rgba(255, 255, 255, 0), $mid-color: rgba(255, 255, 255, 0.197), $end-color: rgba(255, 255, 255, 0)) {
+  overflow: hidden;
+  position: relative;
+  transition: background $transition-time ease-in-out;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -140%;
+    transition: all $transition-time ease-in-out;
+    transform: skewX($skew-angle);
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(120deg, $start-color 30%, $mid-color 50%, $end-color 70%);
+  }
+
+  &:hover::before {
+    left: 100%;
+    transition: all $hover-time ease-in-out;
+  }
+}
+
+
 body {
   margin: 0 auto;
   padding: 0;
