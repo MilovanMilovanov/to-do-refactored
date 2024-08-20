@@ -3,6 +3,7 @@
   --border-color-default: #969393;
   
   --text-color-default-white: #ffffff;
+  --text-color-default-brown: #444;
   --text-color-placeholder: rgba(255, 255, 255, 0.4);
   --text-color-button-default: rgba(255, 255, 255, 0.649);
   --text-color-button-disabled: rgba(246, 243, 243, 0.459);
@@ -32,6 +33,9 @@
   --filter-border-color: #555555;
   --filter-bg-color: #1d1b1b;
   --filter-bg-color-focus: #22413f;
+  --input-bg-focus: rgb(59, 59, 59);
+  
+  --outline-color: #0392f8;
 
   --loader-color: cyan;
 }

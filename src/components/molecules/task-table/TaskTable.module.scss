@@ -42,7 +42,7 @@
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
-
+    border: solid transparent;
     .row {
       &:hover {
         background: var(--button-bg-pagination);

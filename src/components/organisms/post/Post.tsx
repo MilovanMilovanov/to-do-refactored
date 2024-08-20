@@ -72,18 +72,19 @@ function Post(props: PostModel) {
           </div>
         }
       >
-        <Label htmlFor={`title-${formData.title}`} className={styles.labelText}>Title:</Label>
+        <Label htmlFor={`title-${formData.title}`} className={styles.postLabel}>Title:</Label>
         <Input
           id={`${`title-${formData.title}`}`}
           value={formData.title}
           name="title"
+          className={styles.postInput}
           placeholder="Enter your title"
           onChange={handleInputChange}
         />
 
-        <Label htmlFor={`body-${formData.body}`} className={styles.labelText}>Content:</Label>
+        <Label htmlFor={`body-${formData.body}`} className={styles.postLabel}>Content:</Label>
         <Textarea
-        className={styles.contentArea}
+          className={styles.contentArea}
           id={`body-${formData.body}`}
           value={formData.body}
           maxHeight={13}

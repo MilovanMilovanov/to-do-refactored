@@ -59,7 +59,7 @@ function TaskFilters(props: FiltersModel) {
           name="title"
           value={title}
           placeholder="Filter by title"
-          className={styles.filter}
+          className={`${styles.filter} ${styles['filter--byTitle']}`}
           onChange={handleFilterChange}
         />
         <Select

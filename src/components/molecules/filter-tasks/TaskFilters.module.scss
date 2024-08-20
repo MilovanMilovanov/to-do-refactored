@@ -1,7 +1,6 @@
 @import "../../../global.scss";
 
 .container {
-  @include flex-layout($justify: center);
   width: 100%;
 
   .filtersForm {
@@ -10,10 +9,11 @@
 
     fieldset {
       @include flex-layout($direction: row, $gap: 1rem, $justify: center, $align: center);
+      margin: 0;
+      padding-bottom: 1rem;
       border: solid var(--filter-border-color);
       border-bottom: none;
       border-radius: 2rem 2rem 0 0;
-      padding-bottom: 1rem;
       background: var(--filter-bg-color);
 
       .filter {
@@ -23,10 +23,6 @@
         color: var(--text-color-default-white);
         background: var(--button-bg-pagination);
 
-        &:focus {
-          background: var(--filter-bg-color-focus);
-        } 
-
         &::placeholder {
           color: var(--text-color-placeholder);
         }
@@ -34,6 +30,15 @@
         &:hover {
           background: var(--button-bg-hover-default);
         }
+        
+        &--byTitle:focus {
+          transition: ease-in-out 0.1s;
+          border: solid 0.1rem #0392f8;
+        }
+
+        &:focus {
+          background: var(--filter-bg-color-focus);
+        } 
       }
     }
   }

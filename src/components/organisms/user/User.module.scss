@@ -2,23 +2,37 @@
 
 .user {
   min-width: 18rem;
-  width: 23rem;
-  border: none;
-  
-  &--showBorder {
+  box-sizing: border-box;
+  width: 100%;
+
+  &--adjustUser {
+    width: 24rem;
+    padding: 0 0.8rem;
     border: solid var(--border-color-default);
     border-radius: 0.5rem;
   }
   
-
-.labelText {
-  text-align: left;
+.userForm {
+  margin: 0 auto;
+  
+  .userInput {
+    color: var(--text-color-default-brown);
+    transition: ease-in-out 0.1s;
+    height: 2.2rem;
+    &:focus {
+      color: var(--text-color-default-white);
+      border: solid 0.1rem var(--outline-color);
+      background: var(--input-bg-focus);
+    }
+  }
+  .userLabel {
+    text-align: left;
+  }
 }
 
 .btnContainerNav {
   @include flex-layout($justify: space-between);
-  padding: 1rem 1rem 0 1rem;
-
+  padding: 1rem  0.2rem 0.5em 0.2rem;
   &--positionCenter {
     @include flex-layout($justify: center);
   }
