@@ -54,18 +54,18 @@
   .userNavnBtn
    {
     padding: 0.5rem;
-    border-radius: 0.5rem;
     color: var(--text-color-button-default);
     background: var(--link-bg-color-user-posts);
     border-radius: 0.3rem;
     border: none;
+    letter-spacing: 0.05rem;
     
     &:hover {
       color: var(--text-color-default-white);
       background: var(--button-bg-hover-default);
     }
   }
-  
+
   .revertChanges,
   .submitChanges {
     &:not(:disabled) {

@@ -12,6 +12,7 @@
     fieldset {
       padding: 0;
       border: none;
+
     .postInput, .contentArea {
         color: var(--text-color-default-brown);
         transition: ease-in-out 0.1s;
@@ -31,6 +32,7 @@
     }
     
     .contentArea {
+      box-sizing: content-box;
       scrollbar-width: thin;
       scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
     }
@@ -44,9 +46,10 @@
     .revertChanges,
     .submitChanges {
       padding: 0.5rem;
+      letter-spacing: 0.05rem;
+      border-radius: 0.3rem;
       color: var(--text-color-button-default);
       background: var(--link-bg-color-user-posts);
-      border-radius: 0.3rem;
 
         &:not(:disabled) {
           animation: highlightText 0.4s linear;
