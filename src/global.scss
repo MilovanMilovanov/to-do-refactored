@@ -40,6 +40,13 @@
   --loader-color: cyan;
 }
 
+@keyframes highlightText {
+  50% {
+    color: var(--text-color-default-white);
+    text-shadow:  0.1rem 0.1rem 0.6rem var(--text-color-default-white);
+  }
+}
+
 @mixin flex-layout($direction: row, $gap: 0, $justify: unset, $align: unset) {
   display: flex;
   flex-direction: $direction;

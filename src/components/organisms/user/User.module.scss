@@ -10,11 +10,17 @@
     padding: 0 0.8rem;
     border: solid var(--border-color-default);
     border-radius: 0.5rem;
+
+    .userForm {
+      fieldset {
+        gap: 0.8rem;
+      }
+    }
   }
   
 .userForm {
   margin: 0 auto;
-  
+
   .userInput {
     color: var(--text-color-default-brown);
     transition: ease-in-out 0.1s;
@@ -53,11 +59,17 @@
     background: var(--link-bg-color-user-posts);
     border-radius: 0.3rem;
     border: none;
-  
-
+    
     &:hover {
       color: var(--text-color-default-white);
       background: var(--button-bg-hover-default);
+    }
+  }
+  
+  .revertChanges,
+  .submitChanges {
+    &:not(:disabled) {
+      animation: highlightText 0.4s linear;
     }
   }
 }
