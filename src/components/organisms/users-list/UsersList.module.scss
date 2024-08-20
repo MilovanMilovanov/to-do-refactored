@@ -7,8 +7,8 @@
   width: 24rem;
   overflow-y: auto;
   overflow-x: hidden;
-  border: solid var(--list-container-border-color);
+  border: solid var(--border-color-list-container);
   border-radius: 0.5rem;
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-bg-color);
+  scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
 }

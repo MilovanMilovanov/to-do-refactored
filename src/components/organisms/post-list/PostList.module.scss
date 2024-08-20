@@ -4,8 +4,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-bg-color);
-  border: solid var(--list-container-border-color);
+  scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
+  border: solid var(--border-color-default);
   border-radius: 0.5rem;
 
   &--removeScroll {
@@ -29,19 +29,19 @@
   .btnExpand {
     @include flex-layout($justify: space-between, $align: center);
     padding: 0.5rem;
-    border: solid var(--default-white-color);
+    border: solid var(--text-color-default-white);
     border-radius: 0.5rem;
     box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
 
     &:hover {
-      background: var(--user-posts-link-bg-color);
+      background: var( --link-bg-color-user-posts);
     }
 
     .arrowDown {
-      color: var(--user-collapse-arrow-down-color);
+      color: var(--icon-color-collapse-arrow-down);
     }
     .arrowUp {
-      color: var(--user-collapse-arrow-up-color);
+      color: var(--icon-color-collapse-arrow-up);
     }
   }
 
@@ -59,11 +59,11 @@
     margin: 0.4rem auto 0 auto;
     padding: 0.5rem;
     width: 6rem;
-    color: var(--btn-default-color);
-    background: var(--user-posts-link-bg-color);
+    color: var(--text-color-button-default);
+    background: var(--link-bg-color-user-posts);
     &:hover {
-      color: var(--default-white-color);
-      background: var(--btn-default-bg-hover-color);
+      color: var(--text-color-default-white);
+      background: var(--button-bg-hover-default);
     }
   }
 
@@ -72,11 +72,11 @@
     padding: 0.3rem 0.5rem;
     height: 2.5rem;
     width: 5rem;
-    color: var(--white-color);
-    background: var(--btn-delete-post-bg-color);
+    color: var(--text-color-default-white);
+    background: var(--button-bg-delete);
 
     &:hover {
-      background: var(--btn-delete-post-bg-hover-color);
+      background: var(--button-bg-delete-hover);
     }
   }
 }
@@ -84,9 +84,9 @@
 
 .confirmDialog {
   padding: 1.5rem 0;
-  color: var(--btn-default-color);
-  background: var(--confirmation-popup-bg-color);
-  background: var(--confirmation-popup-content-bg-color);
+  color: var( --text-color-button-default);
+  background: var(--button-bg-confirmation-popup);
+  background: var(--popup-bg-color-content);
 
   button {
     @include flex-layout($justify: center, $align: center);
@@ -95,12 +95,12 @@
     width: 5rem;
     height: 2rem;
     border-radius: 0.3rem;
-    color: var(--btn-default-color);
-    background: var(--btn-confirmation-popup-bg-color);
+    color: var( --text-color-button-default);
+    background: var(--button-bg-confirmation-popup);
 
     &:hover {
       font-size: 1.1rem;
-      color: var(--default-white-color);
+      color: var(--text-color-default-white);
       box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
     }
   }

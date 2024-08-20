@@ -6,7 +6,7 @@
   min-width: 40rem;
   width: 50rem;
   height: calc(100vh - 12.5rem);
-  box-shadow: inset 0 0 0.1rem 0.1rem var(--default-app-border-color);
+  box-shadow: inset 0 0 0.1rem 0.1rem var(--border-color-default);
   border-radius: 0 0 0.5rem 0.5rem;
   font-size: 0.9rem;
 
@@ -33,7 +33,7 @@
   .tableHead {
     display: table;
     padding: 0.3rem;
-    background: var(--btn-pagination-bg-color);
+    background: var(--button-bg-pagination);
     box-shadow: 0 0.1rem 0.3rem 0 var(--box-shadow-color);
     z-index: 1;
   }
@@ -41,11 +41,11 @@
   .tableBody {
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-bg-color);
+    scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
 
     .row {
       &:hover {
-        background: var(--btn-pagination-bg-color);
+        background: var(--button-bg-pagination);
       }
       td {
         padding: 0 0.5rem;
@@ -56,13 +56,13 @@
       margin: 0.2rem 0.5rem;
       padding: 0.4rem;
       width: 5rem;
-      color: var(--btn-default-color);
-      background: var(--btn-pagination-bg-color);
+      color: var(--text-color-button-default);
+      background: var(--button-bg-pagination);
       border-radius: 0.3rem;
 
       &:hover {
-        color: var(--default-white-color);
-        background: var(--btn-pagination-bg-hover-color);
+        color: var(--text-color-default-white);
+        background: var(--button-bg-pagination-hover);
         box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
       }
     }
@@ -76,6 +76,6 @@
 
   .noFilterMatchMessage {
     font-size: 1.1rem;
-    color: var(--placeholder-text-color);
+    color: var(--text-color-placeholder);
   }
 }

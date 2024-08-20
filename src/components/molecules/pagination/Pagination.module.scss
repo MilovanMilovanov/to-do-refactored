@@ -12,11 +12,11 @@
     height: 2rem;
     border-radius: 0.3rem;
     color: var(--btn-default-color);
-    background: var(--btn-confirmation-popup-bg-color);
+    background: var(--button-bg-confirmation-popup);
 
     &:hover {
       font-size: 1.1rem;
-      color: var(--default-white-color);
+      color: var(--text-color-default-white);
       box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
     }
   }

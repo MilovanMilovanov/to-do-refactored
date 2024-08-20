@@ -13,7 +13,7 @@
   cursor: pointer;
 
   &--expanded {
-    background: var(--user-posts-link-bg-color);
+    background: var(--link-bg-color-user-posts);
   }
   &--closed {
     background: unset;
@@ -24,13 +24,13 @@
   }
 
   &:hover {
-    background: var(--user-posts-link-bg-color);
+    background: var(--link-bg-color-user-posts);
   }
 
   .arrowDown {
-    color: var(--user-collapse-arrow-down-color);
+    color: var(--icon-color-collapse-arrow-down);
   }
   .arrowUp {
-    color: var(--user-collapse-arrow-up-color);
+    color: var(--icon-color-collapse-arrow-up);
   }
 }

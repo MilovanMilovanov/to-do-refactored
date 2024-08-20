@@ -26,8 +26,9 @@ function Popup({
   const handleCancel = () => setIsOpen(false);
 
   return (
+    <>
+      {isOpen ? (
     <section className={styles.container}>
-      {isOpen && (
         <div
           className={`${styles.modal}`}
           role={role}
@@ -48,9 +49,12 @@ function Popup({
           </div>
           </div>
         </div>
-      )}
       <div>{children}</div>
     </section>
+      ): 
+      <div>{children}</div>
+      }
+    </>
   );
 }
 

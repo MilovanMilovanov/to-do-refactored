@@ -18,7 +18,7 @@
   letter-spacing: 0.1rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--default-white-color);
+  color: var(--text-color-default-white);
 }
 
 .nav a:global(.active) {
@@ -29,5 +29,5 @@ a.ctaLink:link,
 a.ctaLink:visited {
   padding: 0.2rem 2rem;
   border-radius: 0.5rem;
-  color: var(--default-white-color);
+  color: var(--text-color-default-white);
 }

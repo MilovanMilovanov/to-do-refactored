@@ -1,34 +1,42 @@
 :root {
-  --list-container-border-color: #ffff;
-  --default-app-border-color: #969393;
-  --user-collapse-arrow-down-color: red;
-  --user-collapse-arrow-up-color: green;
-  --user-posts-link-color: #ffff;
-  --user-posts-link-bg-color: #414040dc;
-  --box-shadow-color: #ffff;
-  --default-white-color: #ffff;
-  --btn-delete-post-bg-color: rgb(199, 6, 6);
-  --btn-delete-post-bg-hover-color: red;
-  --btn-pagination-bg-color: rgb(59, 59, 59);
-  --btn-pagination-bg-hover-color: rgb(82, 81, 81);
-  --scrollbar-thumb-color: rgb(134, 133, 133);
-  --scrollbar-bg-color: rgb(82, 81, 81);
-  --btn-confirmation-popup-bg-color: #414040;
-  --confirmation-popup-bg-color: #0c0c0cc9;
-  --confirmation-popup-content-bg-color: #0c0c0c9f;
-  --filters-border-color: #555;
-  --filters-bg-color: #1d1b1b;
-  --filters-focus-bg-color: rgba(0, 255, 255, 0.16);
+  --border-color-list-container: #ffffff;
+  --border-color-default: #969393;
+  
+  --text-color-default-white: #ffffff;
+  --text-color-placeholder: rgba(255, 255, 255, 0.4);
+  --text-color-button-default: rgba(255, 255, 255, 0.649);
+  --text-color-button-disabled: rgba(246, 243, 243, 0.459);
+
+  --button-bg-delete: rgb(199, 6, 6);
+  --button-bg-delete-hover: red;
+  --button-bg-pagination: rgb(59, 59, 59);
+  --button-bg-pagination-hover: rgb(82, 81, 81);
+  --button-bg-confirmation-popup: #414040;
+  --button-bg-disabled: rgba(128, 128, 128, 0.129);
+  --button-bg-hover-default: rgb(97, 95, 95);
+
+  --link-color-user-posts: #ffffff;
+  --link-bg-color-user-posts: #414040dc;
+
+  --icon-color-collapse-arrow-down: red;
+  --icon-color-collapse-arrow-up: green;
+
+  --box-shadow-color: #ffffff;
+
+  --scrollbar-color-thumb: rgb(134, 133, 133);
+  --scrollbar-color-bg: rgb(82, 81, 81);
+
+  --popup-bg-color: #0c0c0cc9;
+  --popup-bg-color-content: #0c0c0c9f;
+
+  --filter-border-color: #555555;
+  --filter-bg-color: #1d1b1b;
+  --filter-bg-color-focus: #22413f;
+
   --loader-color: cyan;
-  --btn-default-bg-hover-color:rgb(97, 95, 95);
-  --placeholder-text-color:  rgba(255, 255, 255, 0.4);
-  --btn-default-color: rgba(255, 255, 255, 0.6);
-  --btn-disabled-color: rgba(246, 243, 243, 0.459);
-  --btn-disabled-bg-color: rgba(128, 128, 128, 0.129);
 }
 
-
-@mixin flex-layout($direction: unset, $gap: 0, $justify: unset, $align: unset) {
+@mixin flex-layout($direction: row, $gap: 0, $justify: unset, $align: unset) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justify;
@@ -64,7 +72,7 @@ form {
   fieldset {
     @include flex-layout($direction: column, $gap: 0.4rem );
     padding: 0.8rem;
-    border: solid var(--default-app-border-color);
+    border: solid var(--border-color-default);
     border-radius: 0.5rem;
   }
 
@@ -89,8 +97,7 @@ li {
 
 button:disabled {
     pointer-events: none;
-    color: var(--btn-disabled-color)!important;
-    background: var(--btn-disabled-bg-color)!important;
+    color: var(--text-color-button-disabled)!important;
 }
 
 
