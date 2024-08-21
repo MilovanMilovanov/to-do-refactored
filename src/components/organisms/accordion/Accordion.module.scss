@@ -8,7 +8,8 @@
 .toggleSection {
   @include flex-layout( $justify: space-between, $align: center);
   @include glass-hover-effect();
-  padding: 0.8rem;
+  height: 3.4rem;
+  padding: 0 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.3rem 0 var(--box-shadow-color-accordion);
   cursor: pointer;

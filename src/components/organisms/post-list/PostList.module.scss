@@ -32,7 +32,6 @@
     border: solid var(--text-color-default-white);
     border-radius: 0.5rem;
     box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
-
     &:hover {
       background: var( --link-bg-color-user-posts);
     }
@@ -69,6 +68,7 @@
 
   .btnDelete {
     @include flex-layout($justify: center, $align: center);
+    margin-top: 0.4rem;
     padding: 0.3rem 0.5rem;
     height: 2.5rem;
     width: 5rem;
