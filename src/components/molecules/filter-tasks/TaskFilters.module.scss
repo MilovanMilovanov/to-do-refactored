@@ -10,12 +10,17 @@
     fieldset {
       @include flex-layout($direction: row, $gap: 1rem, $justify: center, $align: center);
       @include glass-hover-effect($hover-time: 0.5s);
+      position: relative;
       margin: 0;
-      padding-bottom: 1rem;
+      padding: 1.4rem 0 1.2rem 0;
       border: solid var(--filter-border-color);
       border-bottom: none;
       border-radius: 2rem 2rem 0 0;
       background: var(--filter-bg-color);
+
+      legend {
+        margin-bottom: -0.8rem;
+      }
 
       .filter {
         min-width: 7rem;
