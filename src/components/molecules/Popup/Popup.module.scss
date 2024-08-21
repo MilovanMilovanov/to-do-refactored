@@ -20,6 +20,12 @@
     .content {
       @include flex-layout($direction: column);
 
+      .title {
+        margin: 0.5rem;
+        line-height: 2rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
       .btnContainer {
         @include flex-layout( $gap: 1rem, $justify: center);
       }
