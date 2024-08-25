@@ -19,9 +19,13 @@ const initialFormData = {
   userId: 0,
 };
 
-function TaskFilters(props: FiltersModel) {
+function TaskFilters({
+  tasks,
+  userIds,
+  statusFilterOptions,
+  setFilteredTasks
+}: FiltersModel) {
   const [formData, setFormData] = useState(initialFormData);
-  const { tasks, userIds, statusFilterOptions, setFilteredTasks } = props;
   const { status, title, userId } = formData;
 
   useEffect(() => {
