@@ -1,4 +1,5 @@
 import { HTMLAttributes, ReactNode } from "react";
+
 import styles from "./Accordion.module.scss";
 
 interface AccordionModel extends HTMLAttributes<HTMLElement> {

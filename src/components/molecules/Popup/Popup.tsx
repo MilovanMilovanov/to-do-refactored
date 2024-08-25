@@ -1,5 +1,7 @@
 import { Dispatch, HTMLAttributes, SetStateAction } from "react";
+
 import Button from "../../atoms/button/Button";
+
 import styles from "./Popup.module.scss";
 
 interface PopupModel extends HTMLAttributes<HTMLElement> {

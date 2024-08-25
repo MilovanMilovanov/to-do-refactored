@@ -1,15 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useApi from "../../../hooks/useApi/useApi";
+import { RootState } from "../../../store";
+
 import {
   setTasks,
   TaskModel,
   updateTaskStatus,
 } from "../../../features/user-tasks/tasksSlice";
-import { RootState } from "../../../store";
+
+import useApi from "../../../hooks/useApi/useApi";
 import TaskTable from "../../molecules/task-table/TaskTable";
 import TaskFilters from "../../molecules/filter-tasks/TaskFilters";
 import Pagination from "../../molecules/pagination/Pagination";
+
 import styles from "./TaskList.module.scss";
 
 const PAGE_SIZE = 10;

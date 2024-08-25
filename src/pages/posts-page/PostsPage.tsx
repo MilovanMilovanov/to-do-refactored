@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { UserModel } from "../../features/user-management/userSlice";
 import { RootState } from "../../store";
+
 import Main from "../../components/templates/main/Main";
 import User from "../../components/organisms/user/User";
 import PageNav from "../../components/organisms/page-nav/PageNav";

@@ -1,5 +1,6 @@
 import { TableHTMLAttributes } from "react";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
+
 import Button from "../../atoms/button/Button";
 import Scrollable from "../../shared/scrollable/Scrollable";
 
@@ -26,7 +27,7 @@ function TaskTable({
           <th className={styles.actions}>Actions</th>
         </tr>
       </thead>
-      <Scrollable scrollWidth={0.8} isChildrenTableElement={true} className={styles.tableBody}>
+      <Scrollable className={styles.tableBody} scrollWidth={0.8} isChildrenTableElement={true}>
         {paginatedTasks.length ? (
           paginatedTasks.map(({ id, title, completed }: TaskModel) => (
             <tr className={styles.row} key={id}>

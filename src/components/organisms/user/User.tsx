@@ -5,12 +5,13 @@ import {
   useCallback,
   useState,
 } from "react";
+import { useDispatch } from "react-redux";
+import { useParams, Link } from "react-router";
 import {
   updateUser,
   UserModel,
 } from "../../../features/user-management/userSlice";
-import { useDispatch } from "react-redux";
-import { useParams, Link } from "react-router";
+
 import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
 import Button from "../../atoms/button/Button";
