@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { UserModel } from "../../../features/user-management/userSlice";
 import Accordion from "../accordion/Accordion";
 import User from "../user/User";
+import Scrollable from "../../shared/scrollable/Scrollable";
+
 import styles from "./UsersList.module.scss";
 
 function UsersList() {
@@ -15,19 +17,22 @@ function UsersList() {
   };
 
   return (
-    <ul className={styles.userList}>
-      {users.map((user: UserModel) => (
-        <Accordion
-          key={user.id}
-          title={user.username}
-          isCollapsed={expandedUserId !== user.id}
-          id={user.id}
-          toggleElement={handleToggleCollapse}
-        >
-          <User {...user}></User>
-        </Accordion>
-      ))}
-    </ul>
+    <Scrollable>
+      <ul className={styles.userList}
+      >
+        {users.map((user: UserModel) => (
+          <Accordion
+            key={user.id}
+            title={user.username}
+            isCollapsed={expandedUserId !== user.id}
+            id={user.id}
+            toggleElement={handleToggleCollapse}
+          >
+            <User {...user}></User>
+          </Accordion>
+        ))}
+      </ul>
+    </Scrollable>
   );
 }
 

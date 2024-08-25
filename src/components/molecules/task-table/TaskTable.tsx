@@ -1,6 +1,7 @@
-import { TableHTMLAttributes } from "react";
+import { TableHTMLAttributes, useRef } from "react";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
 import Button from "../../atoms/button/Button";
+import Scrollable from "../../shared/scrollable/Scrollable";
 
 import styles from "./TaskTable.module.scss";
 
@@ -11,9 +12,11 @@ interface TaskTableModel extends TableHTMLAttributes<HTMLTableElement> {
 }
 
 function TaskTable(props: TaskTableModel) {
+  const tbodyRef = useRef<HTMLTableSectionElement>(null);
+
   const { paginatedTasks, handleTaskStatusChange } = props;
   return (
-    <table className={styles.table}>
+    <table className={`base-table ${styles.table}`}>
       <thead className={styles.tableHead}>
         <tr className={styles.row}>
           <th className={styles.userId}>ID</th>
@@ -22,7 +25,7 @@ function TaskTable(props: TaskTableModel) {
           <th className={styles.actions}>Actions</th>
         </tr>
       </thead>
-      <tbody className={styles.tableBody}>
+      <Scrollable scrollWidth={0.8} isChildrenTableElement={true} ref={tbodyRef} className={styles.tableBody}>
         {paginatedTasks.length ? (
           paginatedTasks.map(({ id, title, completed }: TaskModel) => (
             <tr className={styles.row} key={id}>
@@ -51,7 +54,7 @@ function TaskTable(props: TaskTableModel) {
             </td>
           </tr>
         )}
-      </tbody>
+      </Scrollable>
     </table>
   );
 }

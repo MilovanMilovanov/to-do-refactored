@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { RootState } from "../../../store";
@@ -17,6 +17,7 @@ import Label from "../../atoms/label/Label";
 import Textarea from "../../atoms/textarea/Textarea";
 import Accordion from "../accordion/Accordion";
 import Popup from "../../molecules/Popup/Popup";
+import Scrollable from "../../shared/scrollable/Scrollable";
 
 import styles from "./PostList.module.scss";
 
@@ -36,6 +37,7 @@ function PostList() {
 
   const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
   const posts = useSelector((state: RootState) => state.userPosts[Number(id)]);
+  const postListRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     async function fetchUserPosts() {
@@ -92,81 +94,78 @@ function PostList() {
     setExpandedItemId(null);
   };
 
-
   return (
-    <section className={`${styles.container} ${
-      isPopupOpen && styles["container--removeScroll"]
-    }`}>
-    <Popup
-    message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
-    isOpen={isPopupOpen}
-    className={styles.confirmDialog}
-    setIsOpen={setIsPopupOpen}
-    action={handleDeletePost}
-    >
-    <div
-      className={styles.postList}
-    >
-        <Accordion
-          id={"Add-post-form"}
-          title="Add New Post"
-          isCollapsed={expandedItemId !== "add-post"}
-          toggleElement={() => handleTogglePost("add-post")}
+    <Scrollable isScrollingEnabled={!isPopupOpen}>
+      <Popup
+        message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
+        isOpen={isPopupOpen}
+        className={styles.confirmDialog}
+        setIsOpen={setIsPopupOpen}
+        action={handleDeletePost}
+      >
+        <section
+          className={styles.postList}
         >
-          <Form
-            id="Add-post-form"
-            title="Add Post"
-            className={styles.postForm}
-            onSubmit={handleSubmit}
-            buttons={
-              <Button type="submit" className={styles.btnAddPost}>
-                + Add Post
-              </Button>
-            }
+          <Accordion
+            id={"Add-post-form"}
+            title="Add New Post"
+            isCollapsed={expandedItemId !== "add-post"}
+            toggleElement={() => handleTogglePost("add-post")}
           >
-            <Label htmlFor="add-post-title" className={styles.labelText}>Title:</Label>
-            <Input
-              name="title"
-              required={true}
-              id="add-post-title"
-              value={formData.title}
-              placeholder="Enter your title"
-              onChange={handleInputChange}
-            />
-            <Label htmlFor="add-post-body" className={styles.labelText}>Content:</Label>
-            <Textarea
-              name="body"
-              required={true}
-              id="add-post-body"
-              value={formData.body}
-              placeholder="Enter your post"
-              className={styles.contentArea}
-              onChange={handleInputChange}
-            />
-          </Form>
-        </Accordion>
-        {posts?.map((post) => (
-          <div key={post.id} className={styles.postSection}>
-            <Accordion
-              title={String(post.id)}
-              isCollapsed={expandedItemId !== String(post.id)}
-              id={String(post.id)}
-              toggleElement={handleTogglePost}
+            <Form
+              id="Add-post-form"
+              title="Add Post"
+              className={styles.createPostForm}
+              onSubmit={handleSubmit}
+              buttons={
+                <Button type="submit" className={styles.btnAddPost}>
+                  + Add Post
+                </Button>
+              }
             >
-              <Post {...post} />
-            </Accordion>
+              <Label htmlFor="add-post-title" className={styles.labelText}>Title:</Label>
+              <Input
+                name="title"
+                required={true}
+                id="add-post-title"
+                value={formData.title}
+                placeholder="Enter your title"
+                onChange={handleInputChange}
+              />
+              <Label htmlFor="add-post-body" className={styles.labelText}>Content:</Label>
+              <Textarea
+                name="body"
+                required={true}
+                id="add-post-body"
+                value={formData.body}
+                placeholder="Enter your post"
+                className={styles.contentArea}
+                onChange={handleInputChange}
+              />
+            </Form>
+          </Accordion>
+          {posts?.map((post) => (
+            <ul key={post.id} className={styles.postSection}>
+              <Accordion
+                title={String(post.id)}
+                isCollapsed={expandedItemId !== String(post.id)}
+                id={String(post.id)}
+                toggleElement={handleTogglePost}
+              >
+                <Post {...post} />
+              </Accordion>
 
-            <Button
-              className={styles.btnDelete}
-              onClick={() => handleConfirmationPopup(post.id)}
-            >
-              Delete Post
-            </Button>
-          </div>
-        ))}
-    </div>
-    </Popup>
-    </section>
+              <Button
+                className={styles.btnDelete}
+                onClick={() => handleConfirmationPopup(post.id)}
+              >
+                Delete Post
+              </Button>
+            </ul>
+          ))}
+        </section>
+      </Popup>
+    </Scrollable>
   );
 }
 
