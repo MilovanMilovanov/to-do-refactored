@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, forwardRef, useRef, useState, Ref } from "react";
+import { HTMLAttributes, useEffect, useRef, useState, Ref } from "react";
 import { Container, Content, TableStyles, Tbody } from "./Scrollable.styled";
 
 interface ScrollableModel extends HTMLAttributes<HTMLDivElement> {
@@ -9,7 +9,7 @@ interface ScrollableModel extends HTMLAttributes<HTMLDivElement> {
     thumbColor?: string;
 }
 
-const isValidColor = (color: string) => CSS.supports("color", color) ? color : '';
+const isValidColor = (color: string) => CSS.supports("color", color);
 
 function Scrollable({
     className = '',
@@ -17,22 +17,17 @@ function Scrollable({
     scrollWidth = 1,
     isScrollingEnabled = true,
     isChildrenTableElement = false,
-    children }: ScrollableModel,
-    ref: Ref<HTMLElement>) {
+    children }: ScrollableModel) {
     const [isScrollable, setIsScrollable] = useState<boolean>(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const checkIfScrollable = (element: HTMLElement | null) => {
         if (!element) return;
-
-        const isScrollable = element.scrollHeight > element.clientHeight;
-        setIsScrollable(isScrollable);
+        setIsScrollable(element.scrollHeight > element.clientHeight);
     };
 
     useEffect(() => {
-        const childRef = ref && 'current' in ref && ref.current;
-
-        const targetElement = isChildrenTableElement ? childRef : containerRef.current;
+        const targetElement = containerRef.current;
 
         if (targetElement) {
             checkIfScrollable(targetElement);
@@ -42,7 +37,7 @@ function Scrollable({
 
             return () => resizeObserver.disconnect();
         }
-    }, [children, isChildrenTableElement, ref]);
+    }, [children, isChildrenTableElement]);
 
     return (
         <>
@@ -50,19 +45,19 @@ function Scrollable({
                 <>
                     <TableStyles $isAnimated={isScrollable} />
                     <Tbody
-                        $thumbColor={thumbColor && isValidColor(thumbColor)}
+                        $thumbColor={isValidColor(thumbColor) ? thumbColor : ''}
                         $isScrollingEnabled={isScrollingEnabled}
                         $isScrolling={isScrollable}
                         $scrollWidth={scrollWidth}
                         className={className}
-                        ref={ref as Ref<HTMLTableSectionElement>}
+                        ref={containerRef as Ref<HTMLTableSectionElement>}
                     >
                         {children}
                     </Tbody>
                 </>
                 :
                 <Container
-                    $thumbColor={thumbColor && isValidColor(thumbColor)}
+                    $thumbColor={isValidColor(thumbColor) ? thumbColor : ''}
                     $isScrollingEnabled={isScrollingEnabled}
                     $isAnimated={isScrollable}
                     $scrollWidth={scrollWidth}
@@ -77,7 +72,7 @@ function Scrollable({
     );
 };
 
-export default forwardRef<HTMLElement, ScrollableModel>(Scrollable);
+export default Scrollable;
 
 
 
