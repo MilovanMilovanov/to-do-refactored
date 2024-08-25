@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { RootState } from "../../../store";
@@ -37,7 +37,6 @@ function PostList() {
 
   const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
   const posts = useSelector((state: RootState) => state.userPosts[Number(id)]);
-  const postListRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     async function fetchUserPosts() {
