@@ -11,10 +11,12 @@ interface TaskTableModel extends TableHTMLAttributes<HTMLTableElement> {
   handleTaskStatusChange: (id: number, completed: boolean) => void;
 }
 
-function TaskTable(props: TaskTableModel) {
+function TaskTable({
+  paginatedTasks,
+  handleTaskStatusChange
+}: TaskTableModel) {
   const tbodyRef = useRef<HTMLTableSectionElement>(null);
 
-  const { paginatedTasks, handleTaskStatusChange } = props;
   return (
     <table className={`base-table ${styles.table}`}>
       <thead className={styles.tableHead}>

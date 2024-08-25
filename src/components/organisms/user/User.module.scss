@@ -1,14 +1,14 @@
 @import "../../../global.scss";
 
 .user {
-  min-width: 18rem;
   box-sizing: border-box;
+  overflow: hidden;
   width: 100%;
 
   &--adjustUser {
     width: 24rem;
     padding: 0 0.8rem;
-    border: solid var(--border-color-default);
+    border: solid var(--border-color-list-container);
     border-radius: 0.5rem;
 
     .userForm {

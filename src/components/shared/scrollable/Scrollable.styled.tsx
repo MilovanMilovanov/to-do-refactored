@@ -6,6 +6,7 @@ interface ContainerModel {
   $scrollWidth?: number;
   $isAnimated?: boolean;
   $isScrolling?: boolean;
+  $thumbColor?: string;
 }
 
 const glassSlideEffect = keyframes`
@@ -17,15 +18,15 @@ const glassSlideEffect = keyframes`
   }
 `;
 
-export const glassSlideEffectMixin = css`
+const glassSlideEffectMixin = css`
   background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.197) 50%, rgba(255, 255, 255, 0) 70%);
   background-size: 200% 200%;
   animation: ${glassSlideEffect} 2s linear infinite;
 `;
 
-
-const sharedStyles = css<{ $isScrollingEnabled?: boolean; $scrollWidth?: number; $isAnimated?: boolean }>`
+const scrollableContainerStyles = css<ContainerModel>`
   ${({ $isScrollingEnabled }) => $isScrollingEnabled ? 'overflow-y: auto;' : 'overflow-y: hidden;'}
+  overflow-x: hidden;
   border: solid var(--border-color-list-container);
   border-radius: 0.5rem;
 
@@ -37,18 +38,16 @@ const sharedStyles = css<{ $isScrollingEnabled?: boolean; $scrollWidth?: number;
 
   &::-webkit-scrollbar-thumb {
     border-radius: inherit;
-    box-shadow: inset 0.1rem -0.1rem 0.3rem var(--scrollbar-thumb-color);
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-`;
+     box-shadow: inset 0.1rem -0.1rem 0.3rem ${({ $thumbColor }) => $thumbColor ? $thumbColor : 'var(--scrollbar-thumb-color)'};
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  `;
 
 export const Container = styled.div<ContainerModel>`
-display: flex;
-overflow-x: hidden;
-${sharedStyles}
+${scrollableContainerStyles}
 `;
 
 export const Content = styled.div`
@@ -57,8 +56,7 @@ export const Content = styled.div`
 `;
 
 export const Tbody = styled.tbody<ContainerModel>`
-   ${sharedStyles}
-
+   ${scrollableContainerStyles}
     height: 100%;
     background: ${({ $isScrolling, $scrollWidth }) => $isScrolling ?
     `linear-gradient(to right,
@@ -70,7 +68,7 @@ export const Tbody = styled.tbody<ContainerModel>`
     'var(--app-bg-color)'
   }`
 
-export const GlobalStyles = createGlobalStyle<{ $isAnimated: boolean }>`
+export const TableStyles = createGlobalStyle<{ $isAnimated: boolean }>`
   .base-table {
        ${({ $isAnimated }) => $isAnimated && glassSlideEffectMixin}
   }
