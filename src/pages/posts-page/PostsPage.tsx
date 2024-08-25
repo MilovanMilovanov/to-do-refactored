@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { UserModel } from "../../features/user-management/userSlice";
@@ -25,9 +25,7 @@ function PostsPage() {
       <PageNav />
       <Main className={styles.postsPageLayout}>
         <User key={id} {...user} />
-        <Suspense fallback="Loading posts...">
           <PostList />
-        </Suspense>
       </Main>
     </>
   );
