@@ -1,8 +1,12 @@
 @import "../../../global.scss";
 
+
+
+
 .table {
-  @include flex-layout( $direction: column);
+  @include flex-layout($direction: column);
   overflow: hidden;
+  padding: 0.1rem;
   min-width: 40rem;
   width: 50rem;
   height: calc(100vh - 12.5rem);
@@ -14,21 +18,25 @@
     text-align: left;
     padding-left: 0.3rem;
   }
+
   .title {
     text-align: center;
     width: 50rem;
     overflow: hidden;
   }
+
   .status {
     width: 3.2rem;
     text-align: right;
     padding-right: 2.2rem;
   }
+
   .actions {
     width: 5.2rem;
     text-align: right;
     padding-right: 2.5rem;
   }
+
 
   .tableHead {
     display: table;
@@ -39,14 +47,13 @@
   }
 
   .tableBody {
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
-    border: solid transparent;
+    border: none;
+
     .row {
       &:hover {
         background: var(--button-bg-pagination);
       }
+
       td {
         padding: 0 0.5rem;
       }
@@ -67,10 +74,11 @@
       }
     }
   }
+
 }
 
 .noFilterMatchContainer {
-  @include flex-layout( $justify: center, $align: center);
+  @include flex-layout($justify: center, $align: center);
   height: calc(100vh - 15rem);
   pointer-events: none;
 

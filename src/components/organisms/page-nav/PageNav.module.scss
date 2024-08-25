@@ -1,13 +1,11 @@
 @import "../../../global.scss";
 
 .nav {
-  @include flex-layout( $justify: center, $align: center);
+  @include flex-layout($justify: center, $align: center);
+  padding: 1.2rem 0;
 
   .navList {
-  @include flex-layout($gap: 2rem, $justify: center, $align: center);
-    list-style: none;
-    width: 100%;
-    margin-right: 3rem;
+    @include flex-layout($gap: 2rem);
   }
 }
 

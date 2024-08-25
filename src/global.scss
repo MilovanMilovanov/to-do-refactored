@@ -4,13 +4,13 @@
 
   --border-color-list-container: #ffffff;
   --border-color-default: #969393;
-  
+
   --text-color-default-white: #ffffff;
   --text-color-default-brown: #444;
   --text-color-placeholder: rgba(255, 255, 255, 0.4);
   --text-color-button-default: rgba(255, 255, 255, 0.649);
   --text-color-button-disabled: rgba(246, 243, 243, 0.459);
-  
+
   --button-bg-black: #1e1d1d;
   --button-bg-delete: rgb(157, 6, 6);
   --button-bg-delete-hover: rgba(255, 0, 0, 0.9);
@@ -39,16 +39,18 @@
   --filter-bg-color: #1d1b1b;
   --filter-bg-color-focus: #22413f;
   --input-bg-focus: rgb(59, 59, 59);
-  
+
   --outline-color: #0392f8;
 
   --loader-color: cyan;
+
+  --scrollbar-thumb-color: rgba(0, 255, 255, 0.508);
 }
 
 @keyframes highlightText {
   50% {
     color: var(--text-color-default-white);
-    text-shadow:  0.1rem 0.1rem 2rem var(--text-color-default-white);
+    text-shadow: 0.1rem 0.1rem 2rem var(--text-color-default-white);
   }
 }
 
@@ -64,7 +66,7 @@
   overflow: hidden;
   position: relative;
   transition: background $transition-time ease-in-out;
-  
+
   &::before {
     content: "";
     position: absolute;
@@ -83,6 +85,11 @@
   }
 }
 
+* {
+  outline-style: none;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   margin: 0 auto;
@@ -105,12 +112,11 @@ main {
   height: calc(100vh - 6rem);
 }
 
-
 form {
   margin: 0.5rem 0.8rem 0.8rem 0.8rem;
 
   fieldset {
-    @include flex-layout($direction: column, $gap: 0.4rem );
+    @include flex-layout($direction: column, $gap: 0.4rem);
     padding: 0.8rem;
     border: solid var(--border-color-default);
     border-radius: 0.5rem;
@@ -124,7 +130,6 @@ form {
   }
 }
 
-
 button,
 select {
   cursor: pointer;
@@ -133,14 +138,12 @@ select {
 
 li {
   list-style: none;
- }
-
-button:disabled {
-    pointer-events: none;
-    color: var(--text-color-button-disabled)!important;
 }
 
-
+button:disabled {
+  pointer-events: none;
+  color: var(--text-color-button-disabled) !important;
+}
 
 input,
 textarea {
@@ -151,10 +154,11 @@ textarea {
   resize: none;
 }
 
-button, select, input, textarea {
+button,
+select,
+input,
+textarea {
   border-radius: 0.3rem;
   outline-style: none;
   transition: ease-in-out 0.2s;
 }
-
-
