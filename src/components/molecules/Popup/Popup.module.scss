@@ -1,25 +1,31 @@
 @import "../../../global.scss";
 
 .container {
+  @include flex-layout($align: center);
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  height: 100vh;
+  height: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1.5rem -0.7rem var(--box-shadow-color);
 
   .modal {
-    @include flex-layout($align: center);
+    @include flex-layout($align: center );
     box-sizing: border-box;
     position: absolute;
     z-index: 2;
     top: 0;
     left: 0;
+    margin-bottom: 8rem;
     padding: 0.5rem;
     width: 100%;
     height: 100%;
-    background: var(--popup-bg-color);
 
     .content {
-      @include flex-layout($direction: column);
-      margin-bottom: 8rem;
+      @include flex-layout($direction: column, $gap: 0.8rem);
+      padding: 1rem;
+      background: var(--popup-bg-color);
+      box-shadow: 0 0 5.5rem -3.5rem var(--box-shadow-color);
 
       .title {
         margin: 0.5rem;
