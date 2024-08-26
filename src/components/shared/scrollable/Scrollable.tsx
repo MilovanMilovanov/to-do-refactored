@@ -1,5 +1,17 @@
-import { HTMLAttributes, useEffect, useRef, useState, Ref } from "react";
-import { Container, Content, TableStyles, Tbody } from "./Scrollable.styled";
+import { HTMLAttributes, useEffect, useRef, useState } from "react";
+import { Container } from "./Scrollable.styled";
+
+type HTMLTags = 
+  | "div"
+  | "section"
+  | "article"
+  | "aside"
+  | "main"
+  | "nav"
+  | "table"
+  | "tbody"
+  | "ul"
+  | "ol";
 
 interface ScrollableModel extends HTMLAttributes<HTMLDivElement> {
     scrollWidth?: number;
@@ -7,11 +19,13 @@ interface ScrollableModel extends HTMLAttributes<HTMLDivElement> {
     isChildrenTableElement?: boolean;
     className?: string;
     thumbColor?: string;
+    tagName: HTMLTags;
 }
 
 const isValidColor = (color: string) => CSS.supports("color", color);
 
 function Scrollable({
+    tagName,
     className = '',
     thumbColor = '',
     scrollWidth = 1,
@@ -40,40 +54,20 @@ function Scrollable({
     }, [children, isChildrenTableElement]);
 
     return (
-        <>
-            {isChildrenTableElement ?
-                <>
-                    <TableStyles $isAnimated={isScrollable} />
-                    <Tbody
-                        $thumbColor={isValidColor(thumbColor) ? thumbColor : ''}
-                        $isScrollingEnabled={isScrollingEnabled}
-                        $isScrolling={isScrollable}
-                        $scrollWidth={scrollWidth}
-                        className={className}
-                        ref={containerRef as Ref<HTMLTableSectionElement>}
-                    >
-                        {children}
-                    </Tbody>
-                </>
-                :
-                <Container
-                    $thumbColor={isValidColor(thumbColor) ? thumbColor : ''}
-                    $isScrollingEnabled={isScrollingEnabled}
-                    $isAnimated={isScrollable}
-                    $scrollWidth={scrollWidth}
-                    ref={containerRef}
-                >
-                    <Content>
-                        {children}
-                    </Content>
-                </Container>
-            }
-        </>
+        <Container
+            as={tagName}
+            ref={containerRef}
+            className={className}
+            $scrollWidth={scrollWidth}
+            $isScrollable={isScrollable}
+            $isScrollingEnabled={isScrollingEnabled}
+            $thumbColor={isValidColor(thumbColor) ? thumbColor : ''}
+        >
+            {children}
+        </Container>
     );
 };
 
 export default Scrollable;
-
-
 
 

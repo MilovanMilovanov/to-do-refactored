@@ -27,7 +27,7 @@ function TaskTable({
           <th className={styles.actions}>Actions</th>
         </tr>
       </thead>
-      <Scrollable className={styles.tableBody} scrollWidth={0.8} isChildrenTableElement={true}>
+      <Scrollable tagName="tbody" className={styles.tableBody} scrollWidth={0.8}>
         {paginatedTasks.length ? (
           paginatedTasks.map(({ id, title, completed }: TaskModel) => (
             <tr className={styles.row} key={id}>

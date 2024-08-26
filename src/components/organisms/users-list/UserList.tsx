@@ -18,12 +18,10 @@ function UsersList() {
   };
 
   return (
-    <Scrollable>
-      <ul className={styles.userList}
-      >
-        {users.map((user: UserModel) => (
+    <Scrollable tagName="ul" className={styles.userList}>
+      {users.map((user: UserModel) => (
+        <li key={user.id}>
           <Accordion
-            key={user.id}
             title={user.username}
             isCollapsed={expandedUserId !== user.id}
             id={user.id}
@@ -31,8 +29,8 @@ function UsersList() {
           >
             <User {...user}></User>
           </Accordion>
-        ))}
-      </ul>
+        </li>
+      ))}
     </Scrollable>
   );
 }

@@ -95,17 +95,15 @@ function PostList() {
   };
 
   return (
-    <Scrollable isScrollingEnabled={!isPopupOpen}>
-      <Popup
-        message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
-        isOpen={isPopupOpen}
-        className={styles.confirmDialog}
-        setIsOpen={setIsPopupOpen}
-        action={handleDeletePost}
-      >
-        <section
-          className={styles.postList}
-        >
+    <Popup
+      message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
+      className={styles.confirmDialog}
+      isOpen={isPopupOpen}
+      setIsOpen={setIsPopupOpen}
+      action={handleDeletePost}
+    >
+      <Scrollable className={`${styles.postList} ${isPopupOpen && styles['postList--removeBorder']}`} tagName={"ul"} isScrollingEnabled={!isPopupOpen}>
+        <li>
           <Accordion
             id={"Add-post-form"}
             title="Add New Post"
@@ -130,6 +128,7 @@ function PostList() {
                 id="add-post-title"
                 value={formData.title}
                 placeholder="Enter your title"
+                className={styles.postInput}
                 onChange={handleInputChange}
               />
               <Label htmlFor="add-post-body" className={styles.labelText}>Content:</Label>
@@ -144,28 +143,28 @@ function PostList() {
               />
             </Form>
           </Accordion>
-          {posts?.map((post) => (
-            <ul key={post.id} className={styles.postSection}>
-              <Accordion
-                title={String(post.id)}
-                isCollapsed={expandedItemId !== String(post.id)}
-                id={String(post.id)}
-                toggleElement={handleTogglePost}
-              >
-                <Post {...post} />
-              </Accordion>
+        </li>
+        {posts?.map((post) => (
+          <li key={post.id} className={styles.postSection}>
+            <Accordion
+              title={String(post.id)}
+              isCollapsed={expandedItemId !== String(post.id)}
+              id={String(post.id)}
+              toggleElement={handleTogglePost}
+            >
+              <Post {...post} />
+            </Accordion>
 
-              <Button
-                className={styles.btnDelete}
-                onClick={() => handleConfirmationPopup(post.id)}
-              >
-                Delete Post
-              </Button>
-            </ul>
-          ))}
-        </section>
-      </Popup>
-    </Scrollable>
+            <Button
+              className={styles.btnDelete}
+              onClick={() => handleConfirmationPopup(post.id)}
+            >
+              Delete Post
+            </Button>
+          </li>
+        ))}
+      </Scrollable>
+    </Popup>
   );
 }
 
