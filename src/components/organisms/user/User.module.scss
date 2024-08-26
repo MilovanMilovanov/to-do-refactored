@@ -4,12 +4,13 @@
   box-sizing: border-box;
   overflow: hidden;
   width: 100%;
+  background: var(--app-bg-color);
 
   &--adjustUser {
     width: 24rem;
     padding: 0 0.8rem;
-    border: solid var(--border-color-list-container);
     border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem -0.2rem var(--box-shadow-color);
 
     .userForm {
       fieldset {
