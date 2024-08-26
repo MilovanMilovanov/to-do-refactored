@@ -4,4 +4,6 @@
   @include flex-layout($direction: column, $gap: 1rem);
   padding: 0.7rem;
   width: 24rem;
+  border: solid var(--border-color-list-container);
+  border-radius: 0.5rem;
 }

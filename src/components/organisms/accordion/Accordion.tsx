@@ -18,7 +18,7 @@ function Accordion({
   toggleElement,
 }: AccordionModel) {
   return (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <div
         role="button"
         tabIndex={0}
@@ -34,7 +34,7 @@ function Accordion({
       </div>
 
       {!isCollapsed && children}
-    </section>
+    </div>
   );
 }
 

@@ -77,13 +77,12 @@ function User({
     formData.suite !== suite;
 
   return (
-    <li
+    <div
       className={`${styles.user} ${isUserLoadedFromPosts && styles['user--adjustUser']} ${className}`}
     >
       <div
-        className={`${styles.btnContainerNav} ${
-          !isUserLoadedFromPosts && styles["btnContainerNav--positionCenter"]
-        }`}
+        className={`${styles.btnContainerNav} ${!isUserLoadedFromPosts && styles["btnContainerNav--positionCenter"]
+          }`}
       >
         {isUserLoadedFromPosts ? (
           <>
@@ -189,7 +188,7 @@ function User({
           onChange={handleInputChange}
         />
       </Form>
-    </li>
+    </div>
   );
 }
 

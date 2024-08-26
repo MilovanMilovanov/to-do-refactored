@@ -4,10 +4,27 @@
   @include flex-layout($gap: 1rem, $direction: column);
   padding: 0.7rem;
   width: 24rem;
+  border: solid var(--border-color-list-container);
+  border-radius: 0.5rem;
+
+  &--removeBorder {
+    border: none;
+  }
 
   .createPostForm {
     margin: 0.5rem auto;
     width: 100%;
+
+    .postInput, .contentArea {
+      color: var(--text-color-default-brown);
+      transition: ease-in-out 0.1s;
+      height: 2.2rem;
+      &:focus {
+        color: var(--text-color-default-white);
+        border: solid 0.1rem var(--outline-color);
+        background: var(--input-bg-focus);
+      }
+  }
 
     .labelText {
       text-align: left;

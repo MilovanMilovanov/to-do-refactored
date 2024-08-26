@@ -47,7 +47,7 @@ function Post(props: PostModel) {
     formData.title !== props.title || formData.body !== props.body;
 
   return (
-    <li className={styles.post}>
+    <div className={styles.post}>
       <Form
       className={styles.postForm}
         title="Post Form"
@@ -94,7 +94,7 @@ function Post(props: PostModel) {
           onChange={handleInputChange}
         />
       </Form>
-    </li>
+    </div>
   );
 }
 
