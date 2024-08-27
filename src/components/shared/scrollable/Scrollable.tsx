@@ -1,22 +1,21 @@
-import { HTMLAttributes, useEffect, useRef, useState } from "react";
-import { Container } from "./Scrollable.styled";
+import { HTMLAttributes, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ScrollableContainer } from "./Scrollable.styled";
 
-type HTMLTags = 
-  | "div"
-  | "section"
-  | "article"
-  | "aside"
-  | "main"
-  | "nav"
-  | "table"
-  | "tbody"
-  | "ul"
-  | "ol";
+type HTMLTags =
+    | "div"
+    | "section"
+    | "article"
+    | "aside"
+    | "main"
+    | "nav"
+    | "table"
+    | "tbody"
+    | "ul"
+    | "ol";
 
 interface ScrollableModel extends HTMLAttributes<HTMLElement> {
     scrollWidth?: number;
     isScrollingEnabled?: boolean;
-    isChildrenTableElement?: boolean;
     thumbColor?: string;
     tagName: HTMLTags;
 }
@@ -29,15 +28,17 @@ function Scrollable({
     thumbColor = '',
     scrollWidth = 1,
     isScrollingEnabled = true,
-    isChildrenTableElement = false,
     children }: ScrollableModel) {
     const [isScrollable, setIsScrollable] = useState<boolean>(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const checkIfScrollable = (element: HTMLElement | null) => {
-        if (!element) return;
-        setIsScrollable(element.scrollHeight > element.clientHeight);
-    };
+    const checkIfScrollable = useCallback((element: HTMLElement) => {
+        const isElementScrollable = element.scrollHeight > element.clientHeight;
+
+        if (isElementScrollable !== isScrollable || !isElementScrollable) {
+            setIsScrollable(isElementScrollable);
+        }
+    }, [isScrollable]);
 
     useEffect(() => {
         const targetElement = containerRef.current;
@@ -50,20 +51,24 @@ function Scrollable({
 
             return () => resizeObserver.disconnect();
         }
-    }, [children, isChildrenTableElement]);
+    }, [checkIfScrollable]);
+
+    const containerProps = useMemo(() => ({
+        className,
+        as: tagName,
+        ref: containerRef,
+        $scrollWidth: scrollWidth,
+        $isScrollable: isScrollable,
+        $isScrollingEnabled: isScrollingEnabled,
+        $thumbColor: isValidColor(thumbColor) ? thumbColor : ''
+    }), [tagName, className, scrollWidth, isScrollable, isScrollingEnabled, thumbColor]);
 
     return (
-        <Container
-            as={tagName}
-            ref={containerRef}
-            className={className}
-            $scrollWidth={scrollWidth}
-            $isScrollable={isScrollable}
-            $isScrollingEnabled={isScrollingEnabled}
-            $thumbColor={isValidColor(thumbColor) ? thumbColor : ''}
+        <ScrollableContainer
+            {...containerProps}
         >
             {children}
-        </Container>
+        </ScrollableContainer>
     );
 };
 
