@@ -5,7 +5,7 @@ function useForm<FormModel>(initialValues: FormModel) {
 
   const handleInputChange = ({
     target: { name, value },
-  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,

@@ -1,4 +1,4 @@
-import { ChangeEvent, SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect } from "react";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
 
 import Select from "../../atoms/select/Select";
@@ -6,12 +6,19 @@ import Input from "../../atoms/input/Input";
 import Form from "../form/Form";
 
 import styles from "./TaskFilters.module.scss";
+import useForm from "../../../hooks/useApi/useForm/useForm";
 
 interface FiltersModel {
   userIds: string[];
   tasks: TaskModel[];
   statusFilterOptions: string[];
   setFilteredTasks: React.Dispatch<SetStateAction<TaskModel[]>>;
+}
+
+interface FIltersFormModel {
+  title: string;
+  status: string;
+  userId: number;
 }
 
 const initialFormData = {
@@ -26,8 +33,7 @@ function TaskFilters({
   statusFilterOptions,
   setFilteredTasks
 }: FiltersModel) {
-  const [formData, setFormData] = useState(initialFormData);
-  const { status, title, userId } = formData;
+  const { formData: {status, title, userId}, handleInputChange } = useForm<FIltersFormModel>(initialFormData);
 
   useEffect(() => {
     const filteredData = tasks.filter((task: TaskModel) => {
@@ -48,15 +54,6 @@ function TaskFilters({
     setFilteredTasks(filteredData);
   }, [status, title, userId, tasks, setFilteredTasks]);
 
-  const handleFilterChange = ({
-    target: { name, value },
-  }: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
   return (
     <section className={styles.container}>
       <Form className={styles.filtersForm} title="Task Filter">
@@ -65,7 +62,7 @@ function TaskFilters({
           value={title}
           placeholder="Filter by title"
           className={`${styles.filter} ${styles['filter--byTitle']}`}
-          onChange={handleFilterChange}
+          onChange={handleInputChange}
         />
         <Select
           name="userId"
@@ -73,7 +70,7 @@ function TaskFilters({
           options={userIds}
           className={styles.filter}
           filterDefaultText="Filter by user id"
-          onChange={handleFilterChange}
+          onChange={handleInputChange}
         />
         <Select
           name="status"
@@ -81,7 +78,7 @@ function TaskFilters({
           options={statusFilterOptions}
           className={styles.filter}
           filterDefaultText="Filter by status"
-          onChange={handleFilterChange}
+          onChange={handleInputChange}
         />
       </Form>
     </section>
