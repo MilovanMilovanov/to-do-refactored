@@ -72,7 +72,7 @@ function TaskFilters({
           value={userId}
           options={userIds}
           className={styles.filter}
-          filterDefaultText="Filter By Id"
+          filterDefaultText="Filter by user id"
           onChange={handleFilterChange}
         />
         <Select
@@ -80,7 +80,7 @@ function TaskFilters({
           value={status}
           options={statusFilterOptions}
           className={styles.filter}
-          filterDefaultText="Filter By Status"
+          filterDefaultText="Filter by status"
           onChange={handleFilterChange}
         />
       </Form>

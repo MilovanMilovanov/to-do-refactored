@@ -1,6 +1,7 @@
 import { FormHTMLAttributes, ReactNode } from "react";
 
 interface FormModel extends FormHTMLAttributes<HTMLFormElement> {
+  title: string;
   buttons?: ReactNode;
 }
 

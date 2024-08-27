@@ -13,11 +13,10 @@ type HTMLTags =
   | "ul"
   | "ol";
 
-interface ScrollableModel extends HTMLAttributes<HTMLDivElement> {
+interface ScrollableModel extends HTMLAttributes<HTMLElement> {
     scrollWidth?: number;
     isScrollingEnabled?: boolean;
     isChildrenTableElement?: boolean;
-    className?: string;
     thumbColor?: string;
     tagName: HTMLTags;
 }
