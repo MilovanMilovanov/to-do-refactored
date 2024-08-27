@@ -1,7 +1,7 @@
 import {
   ChangeEvent,
   FormEvent,
-  ReactNode,
+  Fragment,
   useCallback,
   useState,
 } from "react";
@@ -19,49 +19,45 @@ import Label from "../../atoms/label/Label";
 
 import styles from "./User.module.scss";
 
-interface UserComponentModel extends UserModel {
-  className?: string;
-  children?: ReactNode;
+interface FormFieldModel {
+  name: string;
+  label: string;
+  placeholder: string;
 }
+
+const formFields: FormFieldModel[] = [
+  { name: 'username', label: 'Name:', placeholder: 'Enter Name' },
+  { name: 'email', label: 'Email:', placeholder: 'Enter Email' },
+  { name: 'city', label: 'City:', placeholder: 'Enter City' },
+  { name: 'street', label: 'Street:', placeholder: 'Enter Street' },
+  { name: 'suite', label: 'Suite:', placeholder: 'Enter Suite' },
+];
+
+
+const haveObjectChanged = <T extends Record<string, any>>(obj1: T, obj2: T): boolean => (
+  Object.keys(obj1).some(key => obj1[key] !== obj2[key])
+);
 
 function User({
   id,
-  city,
-  suite,
-  email,
-  street,
-  username,
-  className = "",
-}: UserComponentModel) {
+  ...userProps
+}: UserModel) {
   const { id: isUserLoadedFromPosts } = useParams();
 
-  const [formData, setFormData] = useState({
-    username,
-    email,
-    city,
-    street,
-    suite,
-  });
+  const [formData, setFormData] = useState(userProps);
 
   const dispatch = useDispatch();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleInputChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleCancelChanges = useCallback(() => {
-    setFormData({
-      username,
-      email,
-      city,
-      street,
-      suite,
-    });
-  }, [username, email, city, street, suite]);
+  const handleCancelChanges = useCallback(() => (
+    setFormData(userProps)
+  ), [userProps]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,16 +65,11 @@ function User({
     dispatch(updateUser({ id, ...formData }));
   };
 
-  const isFormDataChanged =
-    formData.username !== username ||
-    formData.email !== email ||
-    formData.city !== city ||
-    formData.street !== street ||
-    formData.suite !== suite;
+  const hasFormChanged = haveObjectChanged(formData, userProps);
 
   return (
     <div
-      className={`${styles.user} ${isUserLoadedFromPosts && styles['user--adjustUser']} ${className}`}
+      className={`${styles.user} ${isUserLoadedFromPosts && styles['user--adjustUser']}`}
     >
       <div
         className={`${styles.btnContainerNav} ${!isUserLoadedFromPosts && styles["btnContainerNav--positionCenter"]
@@ -86,14 +77,14 @@ function User({
       >
         {isUserLoadedFromPosts ? (
           <>
-            <span>{username}</span>
+            <span>{userProps.username}</span>
             <Link to="/">
               <Button className={styles.userNavnBtn}>Go back</Button>
             </Link>
           </>
         ) : (
           <Link to={`posts/${id}`}>
-            <Button className={styles.userNavnBtn} >{`Go to ${username}'s posts`}</Button>
+            <Button className={styles.userNavnBtn} >{`Go to ${userProps.username}'s posts`}</Button>
           </Link>
         )}
       </div>
@@ -108,7 +99,7 @@ function User({
             <Button
               type="reset"
               className={styles.revertChanges}
-              disabled={!isFormDataChanged}
+              disabled={!hasFormChanged}
               onClick={handleCancelChanges}
             >
               revert changes
@@ -116,77 +107,30 @@ function User({
             <Button
               type="submit"
               className={styles.submitChanges}
-              disabled={!isFormDataChanged}
+              disabled={!hasFormChanged}
             >
               submit changes
             </Button>
           </div>
         }
       >
-        <Label className={styles.userLabel} htmlFor={`username-${id}`}>
-          Name:
-        </Label>
-        <Input
-          id={`username-${id}`}
-          value={formData.username}
-          className={styles.userInput}
-          name="username"
-          placeholder="Enter Name"
-          required={true}
-          onChange={handleInputChange}
-        />
 
-        <Label className={styles.userLabel} htmlFor={`email-${id}`}>
-          Email:
-        </Label>
-        <Input
-          id={`email-${id}`}
-          value={formData.email}
-          className={styles.userInput}
-          name="email"
-          placeholder="Enter Email"
-          required={true}
-          onChange={handleInputChange}
-        />
-
-        <Label className={styles.userLabel} htmlFor={`city-${id}`}>
-          City:
-        </Label>
-        <Input
-          id={`city-${id}`}
-          value={formData.city}
-          className={styles.userInput}
-          name="city"
-          placeholder="Enter City"
-          required={true}
-          onChange={handleInputChange}
-        />
-
-        <Label className={styles.userLabel} htmlFor={`street-${id}`}>
-          Street:
-        </Label>
-        <Input
-          id={`street-${id}`}
-          value={formData.street}
-          className={styles.userInput}
-          name="street"
-          placeholder="Enter Street"
-          required={true}
-          onChange={handleInputChange}
-        />
-
-        <Label className={styles.userLabel} htmlFor={`suite-${id}`}>
-          Suite:
-        </Label>
-        <Input
-          id={`suite-${id}`}
-          value={formData.suite}
-          className={styles.userInput}
-          name="suite"
-          placeholder="Enter suite"
-          required={true}
-          onChange={handleInputChange}
-        />
+        {formFields.map(({ name, label, placeholder }) => (
+          <Fragment key={name}>
+            <Label className={styles.userLabel} htmlFor={`${name}-${id}`}>
+              {label}
+            </Label>
+            <Input
+              id={`${name}-${id}`}
+              value={formData[name as keyof typeof formData]}
+              className={styles.userInput}
+              name={name}
+              placeholder={placeholder}
+              required
+              onChange={handleInputChange}
+            />
+          </Fragment>
+        ))}
       </Form>
     </div>
   );

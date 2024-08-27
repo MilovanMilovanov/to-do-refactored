@@ -27,7 +27,7 @@ function UsersList() {
             id={user.id}
             toggleElement={handleToggleCollapse}
           >
-            <User {...user}></User>
+            <User {...user} />
           </Accordion>
         </li>
       ))}
