@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useCallback } from "react";
 import { PostModel, updatePost } from "../../../features/user-posts/postsSlice";
 import { useDispatch } from "react-redux";
 
@@ -10,22 +10,17 @@ import Button from "../../atoms/button/Button";
 import Textarea from "../../atoms/textarea/Textarea";
 
 import styles from "../post/Post.module.scss";
+import useForm from "../../../hooks/useApi/useForm/useForm";
 
 function Post(props: PostModel) {
   const { request } = useApi();
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState<PostModel>(props);
+  const { formData, resetForm, handleInputChange } = useForm<PostModel>(props);
 
-  const handleInputChange = ({
-    target: { name, value },
-  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
-  const handleCancelChanges = () => setFormData(props);
+  const handleCancelChanges = useCallback(() => (
+    resetForm(props)
+  ), [props]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,7 +44,7 @@ function Post(props: PostModel) {
   return (
     <div className={styles.post}>
       <Form
-      className={styles.postForm}
+        className={styles.postForm}
         title="Post Form"
         id={String(props.id)}
         onSubmit={handleSubmit}

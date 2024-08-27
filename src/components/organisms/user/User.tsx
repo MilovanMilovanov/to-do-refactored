@@ -1,9 +1,7 @@
 import {
-  ChangeEvent,
   FormEvent,
   Fragment,
   useCallback,
-  useState,
 } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router";
@@ -12,6 +10,7 @@ import {
   updateUser,
   UserModel,
 } from "../../../features/user-management/userSlice";
+import useForm from "../../../hooks/useApi/useForm/useForm";
 
 import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
@@ -34,27 +33,17 @@ const formFields: FormFieldModel[] = [
   { name: 'suite', label: 'Suite:', placeholder: 'Enter Suite' },
 ];
 
-
-
 function User({
   id,
   ...userProps
 }: UserModel) {
   const { id: isUserLoadedFromPosts } = useParams();
-
-  const [formData, setFormData] = useState(userProps);
+  const { formData, resetForm, handleInputChange } = useForm<Omit<UserModel, "id">>(userProps);
 
   const dispatch = useDispatch();
 
-  const handleInputChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
   const handleCancelChanges = useCallback(() => (
-    setFormData(userProps)
+    resetForm(userProps)
   ), [userProps]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
