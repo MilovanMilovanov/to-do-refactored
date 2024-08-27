@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router";
+import { areObjectValuesDifferent } from "../../../utils/utils";
 import {
   updateUser,
   UserModel,
@@ -34,9 +35,6 @@ const formFields: FormFieldModel[] = [
 ];
 
 
-const haveObjectChanged = <T extends Record<string, any>>(obj1: T, obj2: T): boolean => (
-  Object.keys(obj1).some(key => obj1[key] !== obj2[key])
-);
 
 function User({
   id,
@@ -65,7 +63,7 @@ function User({
     dispatch(updateUser({ id, ...formData }));
   };
 
-  const hasFormChanged = haveObjectChanged(formData, userProps);
+  const hasFormChanged = areObjectValuesDifferent(formData, userProps);
 
   return (
     <div
