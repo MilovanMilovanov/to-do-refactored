@@ -18,32 +18,34 @@
       }
     }
   }
-  
-.userForm {
-  margin: 0 auto;
 
-  .userInput {
-    color: var(--text-color-default-brown);
-    transition: ease-in-out 0.1s;
-    height: 2.2rem;
-    &:focus {
-      color: var(--text-color-default-white);
-      border: solid 0.1rem var(--outline-color);
-      background: var(--input-bg-focus);
+  .userForm {
+    margin: 0 auto;
+
+    .userInput {
+      color: var(--text-color-default-brown);
+      transition: ease-in-out 0.1s;
+      height: 2.2rem;
+
+      &:focus {
+        color: var(--text-color-default-white);
+        border: solid 0.1rem var(--outline-color);
+        background: var(--input-bg-focus);
+      }
+    }
+
+    .userLabel {
+      text-align: left;
     }
   }
-  .userLabel {
-    text-align: left;
-  }
-}
 
-.btnContainerNav {
-  @include flex-layout($justify: space-between);
-  padding: 1rem  0.2rem 0.5em 0.2rem;
-  &--positionCenter {
-    @include flex-layout($justify: center);
+  .btnContainerNav {
+    @include flex-layout($justify: space-between);
+    padding: 1rem 0.2rem 0.5em 0.2rem;
+    &--positionCenter {
+      @include flex-layout($justify: center);
+    }
   }
-}
 
   .btnContainerForm {
     @include flex-layout($justify: space-between, $align: center);
@@ -52,15 +54,14 @@
 
   .revertChanges,
   .submitChanges,
-  .userNavnBtn
-   {
+  .btnContainerNav button {
     padding: 0.5rem;
+    letter-spacing: 0.05rem;
     color: var(--text-color-button-default);
     background: var(--link-bg-color-user-posts);
     border-radius: 0.3rem;
     border: none;
-    letter-spacing: 0.05rem;
-    
+
     &:hover {
       color: var(--text-color-default-white);
       background: var(--button-bg-hover-default);

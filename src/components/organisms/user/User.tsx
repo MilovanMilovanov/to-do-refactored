@@ -1,10 +1,11 @@
 import {
   FormEvent,
   Fragment,
+  ReactNode,
   useCallback,
 } from "react";
 import { useDispatch } from "react-redux";
-import { useParams, Link } from "react-router";
+import { useParams } from "react-router";
 import { areObjectValuesDifferent } from "../../../utils/utils";
 import {
   updateUser,
@@ -33,11 +34,16 @@ const formFields: FormFieldModel[] = [
   { name: 'suite', label: 'Suite:', placeholder: 'Enter Suite' },
 ];
 
+interface UserNavigation {
+  userNavigation?: ReactNode;
+}
+
 function User({
   id,
+  userNavigation,
   ...userProps
-}: UserModel) {
-  const { id: isUserLoadedFromPosts } = useParams();
+}: UserModel & UserNavigation) {
+  const { id: isSingleUserLoaded } = useParams();
   const { formData, resetForm, handleInputChange } = useForm<Omit<UserModel, "id">>(userProps);
 
   const dispatch = useDispatch();
@@ -56,25 +62,17 @@ function User({
 
   return (
     <div
-      className={`${styles.user} ${isUserLoadedFromPosts && styles['user--adjustUser']}`}
+      className={`${styles.user} ${isSingleUserLoaded && styles['user--adjustUser']}`}
     >
-      <div
-        className={`${styles.btnContainerNav} ${!isUserLoadedFromPosts && styles["btnContainerNav--positionCenter"]
-          }`}
-      >
-        {isUserLoadedFromPosts ? (
-          <>
-            <span>{userProps.username}</span>
-            <Link to="/">
-              <Button className={styles.userNavnBtn}>Go back</Button>
-            </Link>
-          </>
-        ) : (
-          <Link to={`posts/${id}`}>
-            <Button className={styles.userNavnBtn} >{`Go to ${userProps.username}'s posts`}</Button>
-          </Link>
-        )}
-      </div>
+
+      {userNavigation &&
+        <div
+          className={`${styles.btnContainerNav} ${!isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
+            }`}
+        >
+          {userNavigation}
+        </div>
+      }
 
       <Form
         id={id}
@@ -116,10 +114,11 @@ function User({
               required
               onChange={handleInputChange}
             />
-          </Fragment>
-        ))}
-      </Form>
-    </div>
+          </Fragment >
+        ))
+        }
+      </Form >
+    </div >
   );
 }
 

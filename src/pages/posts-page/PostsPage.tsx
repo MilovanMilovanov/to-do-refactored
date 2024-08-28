@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { useSelector } from "react-redux";
 import { UserModel } from "../../features/user-management/userSlice";
 import { RootState } from "../../store";
@@ -7,6 +7,7 @@ import { RootState } from "../../store";
 import Main from "../../components/templates/main/Main";
 import User from "../../components/organisms/user/User";
 import PageNav from "../../components/organisms/page-nav/PageNav";
+import Button from "../../components/atoms/button/Button";
 
 import styles from "./PostsPage.module.scss";
 
@@ -25,8 +26,17 @@ function PostsPage() {
     <>
       <PageNav />
       <Main className={styles.postsPageLayout}>
-        <User key={id} {...user} />
-          <PostList />
+        {user &&
+          <User key={id} {...user} userNavigation={
+            <>
+              <span>{user.username}</span>
+              <Link to="/">
+                <Button>Go back</Button>
+              </Link>
+            </>
+          } />
+        }
+        <PostList />
       </Main>
     </>
   );
