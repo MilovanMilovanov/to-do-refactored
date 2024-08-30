@@ -42,9 +42,7 @@ function User({
     reset(userProps)
   ), [userProps]);
 
-  const onSubmit = () => {
-    isValid && dispatch(updateUser({ id, ...getValues() }));
-  };
+  const onSubmit = () => dispatch(updateUser({ id, ...getValues() }));
 
   return (
     <div
@@ -69,7 +67,7 @@ function User({
             <Button
               type="reset"
               className={styles.revertChanges}
-              disabled={!isDirty}
+              disabled={!isDirty || !isValid}
               onClick={handleCancelChanges}
             >
               revert changes
@@ -77,13 +75,14 @@ function User({
             <Button
               type="submit"
               className={styles.submitChanges}
-              disabled={!isDirty}
+              disabled={!isDirty || !isValid}
             >
               submit changes
             </Button>
           </div>
         }
       >
+
 
         {formFields.map(({ name, label, placeholder }) => (
           <Fragment key={name}>
@@ -96,21 +95,21 @@ function User({
                 {label}
               </Label>
               <div className={styles.inputWrapper} ref={(el) => inputRefs.current[name] = el}>
-              <Input
-                id={`${name}-${id}`}
-                placeholder={placeholder}
-                aria-describedby={errors[name] && `${name}-error`}
-                className={`${styles.userInput} ${errors[name] && styles['userInput--error']}`}
-                autoComplete={autocompleteAttributes[name]}
-                {...register(name, validationRules[name])}
-              />
-              {errors[name] && <InputErrorIcon role="img" aria-label="error icon" className={styles.errorIcon} fill={'red'} width={'1.3rem'} />}
-            </div>
-          </ValidationTooltip>
+                <Input
+                  id={`${name}-${id}`}
+                  placeholder={placeholder}
+                  aria-describedby={errors[name] && `${name}-error`}
+                  className={`${styles.userInput} ${errors[name] && styles['userInput--error']}`}
+                  autoComplete={autocompleteAttributes[name]}
+                  {...register(name, validationRules[name])}
+                />
+                {errors[name] && <InputErrorIcon role="img" aria-label="error icon" className={styles.errorIcon} fill={'red'} width={'1.3rem'} />}
+              </div>
+            </ValidationTooltip>
           </Fragment >
-      ))
+        ))
         }
-    </Form >
+      </Form >
     </div >
   );
 }
