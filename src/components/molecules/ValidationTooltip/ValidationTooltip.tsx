@@ -9,7 +9,6 @@ interface ValidationTooltipModel extends HTMLAttributes<HTMLElement> {
     error: FieldError | undefined;
 };
 
-
 function ValidationTooltip({
     id,
     error,

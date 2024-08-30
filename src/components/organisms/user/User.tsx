@@ -1,5 +1,4 @@
 import {
-  Fragment,
   ReactNode,
   useCallback,
   useRef,
@@ -34,7 +33,7 @@ function User({
   ...userProps
 }: UserModel & UserNavigation) {
   const { id: isSingleUserLoaded } = useParams();
-  const { handleSubmit, reset, getValues, register, formState: { isDirty, errors, isValid } } = useForm<UserFormModel>({ values: userProps, mode: 'onChange' });
+  const { handleSubmit, reset, getValues, register, formState: { isValid, isDirty, errors  } } = useForm<UserFormModel>({ values: userProps, mode: 'onChange' });
   const dispatch = useDispatch();
   const inputRefs = useRef<Record<string, HTMLDivElement | null>>({});
 

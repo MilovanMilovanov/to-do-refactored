@@ -1,6 +1,5 @@
 @import "../../../global.scss";
 
-
 .tooltipError {
     @include flex-layout($justify: center, $align: center);
     position: absolute;
