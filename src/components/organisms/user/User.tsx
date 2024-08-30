@@ -83,32 +83,42 @@ function User({
         }
       >
 
+        {formFields.map(({ name, label, placeholder }) => {
+          const inputId = `${name}-${id}`;
+          const errorId = `${name}-error`;
+          const hasError = errors[name];
 
-        {formFields.map(({ name, label, placeholder }) => (
-          <Fragment key={name}>
+          return (
             <ValidationTooltip
-              id={`${name}-error`}
-              error={errors[name]}
+              key={name}
+              id={errorId}
+              error={hasError}
               portalTarget={inputRefs.current[name]}
             >
-              <Label className={styles.userLabel} htmlFor={`${name}-${id}`}>
+              <Label className={styles.userLabel} htmlFor={inputId}>
                 {label}
               </Label>
-              <div className={styles.inputWrapper} ref={(el) => inputRefs.current[name] = el}>
+              <div className={styles.inputWrapper}
+                ref={(el) => inputRefs.current[name] = el}>
                 <Input
-                  id={`${name}-${id}`}
+                  id={inputId}
                   placeholder={placeholder}
-                  aria-describedby={errors[name] && `${name}-error`}
-                  className={`${styles.userInput} ${errors[name] && styles['userInput--error']}`}
                   autoComplete={autocompleteAttributes[name]}
+                  aria-describedby={hasError && errorId}
+                  className={`${styles.userInput} ${hasError && styles['userInput--error']}`}
                   {...register(name, validationRules[name])}
                 />
-                {errors[name] && <InputErrorIcon role="img" aria-label="error icon" className={styles.errorIcon} fill={'red'} width={'1.3rem'} />}
+                {hasError && (
+                  <InputErrorIcon
+                    role="img"
+                    aria-label="error icon"
+                    className={styles.errorIcon}
+                  />
+                )}
               </div>
             </ValidationTooltip>
-          </Fragment >
-        ))
-        }
+          )
+        })}
       </Form >
     </div >
   );
