@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes, Ref } from "react";
 
 type InputModel = InputHTMLAttributes<HTMLInputElement>;
 
@@ -6,26 +6,29 @@ function Input({
   id,
   name,
   value,
-  required,
   placeholder,
+  autoComplete,
   type = "text",
   className = "",
   disabled = false,
+  "aria-describedby": ariaDescribedby,
   onChange,
-}: InputModel) {
+}: InputModel, ref: Ref<HTMLInputElement>) {
   return (
     <input
       id={id}
+      ref={ref}
       type={type}
       name={name}
       value={value}
-      required={required}
       disabled={disabled}
       className={className}
       placeholder={placeholder}
+      autoComplete={autoComplete}
+      aria-describedby={ariaDescribedby}
       onChange={onChange}
     />
   );
 }
 
-export default Input;
+export default forwardRef(Input);

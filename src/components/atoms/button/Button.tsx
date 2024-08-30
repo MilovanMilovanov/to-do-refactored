@@ -8,7 +8,6 @@ function Button({
   type = "button",
   disabled = false,
   className = "",
-  ariaLabel,
   children,
   onClick,
 }: ButtonModel) {
@@ -17,7 +16,6 @@ function Button({
       type={type}
       disabled={disabled}
       className={className}
-      aria-label={ariaLabel}
       onClick={onClick}
     >
       {children}

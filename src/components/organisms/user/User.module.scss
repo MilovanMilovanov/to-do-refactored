@@ -11,37 +11,67 @@
     padding: 0 0.8rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5rem -0.2rem var(--box-shadow-color);
-
-    .userForm {
-      fieldset {
-        gap: 0.8rem;
-      }
-    }
   }
 
   .userForm {
     margin: 0 auto;
 
-    .userInput {
-      color: var(--text-color-default-brown);
-      transition: ease-in-out 0.1s;
-      height: 2.2rem;
+    fieldset {
+      gap: 0.8rem;
+    }
 
-      &:focus {
-        color: var(--text-color-default-white);
-        border: solid 0.1rem var(--outline-color);
-        background: var(--input-bg-focus);
+    .inputWrapper {
+      @include flex-layout($justify: center);
+      position: relative;
+      margin-bottom: 0.4rem;
+
+      .errorIcon {
+        height: 100%;
+        position: absolute;
+        right: 0.4rem;
       }
+
+      .userInput {
+        padding-right: 1.8rem;
+        transition: ease-in-out 0.2s;
+        height: 2.2rem;
+        width: 100%;
+        color: var(--text-color-default-brown);
+
+        &:focus {
+          color: var(--text-color-default-white);
+          border: 0.1rem solid var(--outline-color);
+          background: var(--input-bg-focus);
+        }
+
+        &--error {
+          border: 0.1rem solid var(--border-color-input-error);
+          border-radius: unset;
+
+          &:focus {
+            border: 0.1rem solid var(--border-color-input-error);
+          }
+
+          &:not(:focus) {
+            background: var(--error-bg-color-onBlur);
+          }
+        }
+      }
+
     }
 
     .userLabel {
+      font-family: "Helvetica Neue-Roman", 'sans-serif';
       text-align: left;
     }
   }
 
   .btnContainerNav {
-    @include flex-layout($justify: space-between);
+    @include flex-layout($justify: space-between, $align: center);
     padding: 1rem 0.2rem 0.5em 0.2rem;
+    height: fit-content;
+
+
     &--positionCenter {
       @include flex-layout($justify: center);
     }
@@ -49,7 +79,7 @@
 
   .btnContainerForm {
     @include flex-layout($justify: space-between, $align: center);
-    margin-top: 0.5rem;
+    margin-top: 1rem;
   }
 
   .revertChanges,

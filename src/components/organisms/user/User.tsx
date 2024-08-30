@@ -1,18 +1,20 @@
 import {
-  FormEvent,
   Fragment,
   ReactNode,
   useCallback,
+  useRef,
 } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { areObjectValuesDifferent } from "../../../utils/utils";
+import { useForm } from "react-hook-form";
 import {
   updateUser,
   UserModel,
 } from "../../../features/user-management/userSlice";
-import useForm from "../../../hooks/useApi/useForm/useForm";
+import { formFields, autocompleteAttributes, validationRules } from "./constants/userFormConstants";
 
+import ValidationTooltip from "../../molecules/ValidationTooltip/ValidationTooltip";
+import InputErrorIcon from '../../../assets/icons/input-error-icon.svg';
 import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
 import Button from "../../atoms/button/Button";
@@ -20,19 +22,7 @@ import Label from "../../atoms/label/Label";
 
 import styles from "./User.module.scss";
 
-interface FormFieldModel {
-  name: string;
-  label: string;
-  placeholder: string;
-}
-
-const formFields: FormFieldModel[] = [
-  { name: 'username', label: 'Name:', placeholder: 'Enter Name' },
-  { name: 'email', label: 'Email:', placeholder: 'Enter Email' },
-  { name: 'city', label: 'City:', placeholder: 'Enter City' },
-  { name: 'street', label: 'Street:', placeholder: 'Enter Street' },
-  { name: 'suite', label: 'Suite:', placeholder: 'Enter Suite' },
-];
+export type UserFormModel = Omit<UserModel, "id">;
 
 interface UserNavigation {
   userNavigation?: ReactNode;
@@ -44,27 +34,22 @@ function User({
   ...userProps
 }: UserModel & UserNavigation) {
   const { id: isSingleUserLoaded } = useParams();
-  const { formData, resetForm, handleInputChange } = useForm<Omit<UserModel, "id">>(userProps);
-
+  const { handleSubmit, reset, getValues, register, formState: { isDirty, errors, isValid } } = useForm<UserFormModel>({ values: userProps, mode: 'onChange' });
   const dispatch = useDispatch();
+  const inputRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleCancelChanges = useCallback(() => (
-    resetForm(userProps)
+    reset(userProps)
   ), [userProps]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    dispatch(updateUser({ id, ...formData }));
+  const onSubmit = () => {
+    isValid && dispatch(updateUser({ id, ...getValues() }));
   };
-
-  const hasFormChanged = areObjectValuesDifferent(formData, userProps);
 
   return (
     <div
       className={`${styles.user} ${isSingleUserLoaded && styles['user--adjustUser']}`}
     >
-
       {userNavigation &&
         <div
           className={`${styles.btnContainerNav} ${!isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
@@ -78,13 +63,13 @@ function User({
         id={id}
         title="User Form"
         className={styles.userForm}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         buttons={
           <div className={styles.btnContainerForm}>
             <Button
               type="reset"
               className={styles.revertChanges}
-              disabled={!hasFormChanged}
+              disabled={!isDirty}
               onClick={handleCancelChanges}
             >
               revert changes
@@ -92,7 +77,7 @@ function User({
             <Button
               type="submit"
               className={styles.submitChanges}
-              disabled={!hasFormChanged}
+              disabled={!isDirty}
             >
               submit changes
             </Button>
@@ -102,22 +87,30 @@ function User({
 
         {formFields.map(({ name, label, placeholder }) => (
           <Fragment key={name}>
-            <Label className={styles.userLabel} htmlFor={`${name}-${id}`}>
-              {label}
-            </Label>
-            <Input
-              id={`${name}-${id}`}
-              value={formData[name as keyof typeof formData]}
-              className={styles.userInput}
-              name={name}
-              placeholder={placeholder}
-              required
-              onChange={handleInputChange}
-            />
+            <ValidationTooltip
+              id={`${name}-error`}
+              error={errors[name]}
+              portalTarget={inputRefs.current[name]}
+            >
+              <Label className={styles.userLabel} htmlFor={`${name}-${id}`}>
+                {label}
+              </Label>
+              <div className={styles.inputWrapper} ref={(el) => inputRefs.current[name] = el}>
+              <Input
+                id={`${name}-${id}`}
+                placeholder={placeholder}
+                aria-describedby={errors[name] && `${name}-error`}
+                className={`${styles.userInput} ${errors[name] && styles['userInput--error']}`}
+                autoComplete={autocompleteAttributes[name]}
+                {...register(name, validationRules[name])}
+              />
+              {errors[name] && <InputErrorIcon role="img" aria-label="error icon" className={styles.errorIcon} fill={'red'} width={'1.3rem'} />}
+            </div>
+          </ValidationTooltip>
           </Fragment >
-        ))
+      ))
         }
-      </Form >
+    </Form >
     </div >
   );
 }

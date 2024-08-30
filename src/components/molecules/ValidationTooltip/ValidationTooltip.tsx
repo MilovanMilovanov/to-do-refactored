@@ -16,7 +16,6 @@ function ValidationTooltip({
     children,
     portalTarget,
 }: ValidationTooltipModel) {
-
     return (
         <>
             {children}
