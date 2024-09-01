@@ -13,9 +13,9 @@
 
   .createPostForm {
     margin: 0.5rem auto;
-    width: 100%;
 
-    .postInput, .contentArea {
+    .postInput,
+    .contentArea {
       color: var(--text-color-default-brown);
       transition: ease-in-out 0.1s;
       height: 2.2rem;
@@ -24,7 +24,13 @@
         border: solid 0.1rem var(--outline-color);
         background: var(--input-bg-focus);
       }
-  }
+    }
+
+    .contentArea {
+      box-sizing: content-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
+    }
 
     .labelText {
       text-align: left;
@@ -63,7 +69,6 @@
     }
   }
 }
-
 
 .confirmDialog {
   padding: 1.5rem 0;

@@ -1,5 +1,6 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { RootState } from "../../../store";
 import {
@@ -22,7 +23,9 @@ import Scrollable from "../../shared/scrollable/Scrollable";
 
 import styles from "./PostList.module.scss";
 
-const initialFormData = {
+type PostFormModel = Pick<PostModel, "title" | "body">;
+
+const initialFormData: PostFormModel = {
   title: "",
   body: "",
 };
@@ -33,9 +36,10 @@ function PostList() {
   const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [deleteItemId, setDeleteItemId] = useState<number>(0);
-  const [formData, setFormData] =
-    useState<Pick<PostModel, "title" | "body">>(initialFormData);
-
+  const { handleSubmit, register, getValues, reset } = useForm<PostFormModel>({
+    defaultValues: initialFormData,
+    mode: "onSubmit",
+  });
   const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
   const posts = useSelector((state: RootState) => state.userPosts[Number(id)]);
 
@@ -71,28 +75,21 @@ function PostList() {
     setDeleteItemId(id);
   };
 
-  const handleInputChange = ({
-    target: { name, value },
-  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const onSubmit = () => {
     request({
       method: "POST",
       endpoint: "posts",
-      body: JSON.stringify(formData),
+      body: JSON.stringify(getValues()),
     });
 
-    dispatch(addPost({ ...formData, userId: Number(id), id: 0 }));
-    setFormData(initialFormData);
+    dispatch(addPost({ ...getValues(), userId: Number(id), id: 0 }));
     setExpandedItemId(null);
+    reset(initialFormData);
   };
+
+  const addPostFormId = "Add-post-form";
+  const titleInputId = "add-post-title";
+  const textareaId = "add-post-body";
 
   return (
     <Popup
@@ -102,44 +99,49 @@ function PostList() {
       setIsOpen={setIsPopupOpen}
       action={handleDeletePost}
     >
-      <Scrollable className={`${styles.postList} ${isPopupOpen && styles['postList--removeBorder']}`} tagName={"ul"} isScrollingEnabled={!isPopupOpen}>
+      <Scrollable
+        className={`${styles.postList} ${
+          isPopupOpen && styles["postList--removeBorder"]
+        }`}
+        tagName={"ul"}
+        isScrollingEnabled={!isPopupOpen}
+      >
         <li>
           <Accordion
-            id={"Add-post-form"}
+            id={addPostFormId}
             title="Add New Post"
             isCollapsed={expandedItemId !== "add-post"}
             toggleElement={() => handleTogglePost("add-post")}
           >
             <Form
-              id="Add-post-form"
+              id={addPostFormId}
               title="Add Post"
               className={styles.createPostForm}
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               buttons={
                 <Button type="submit" className={styles.btnAddPost}>
                   + Add Post
                 </Button>
               }
             >
-              <Label htmlFor="add-post-title" className={styles.labelText}>Title:</Label>
+              <Label htmlFor={titleInputId} className={styles.labelText}>
+                Title:
+              </Label>
               <Input
-                name="title"
-                required={true}
-                id="add-post-title"
-                value={formData.title}
+                id={titleInputId}
+                {...register("title")}
                 placeholder="Enter your title"
                 className={styles.postInput}
-                onChange={handleInputChange}
               />
-              <Label htmlFor="add-post-body" className={styles.labelText}>Content:</Label>
+              <Label htmlFor={textareaId} className={styles.labelText}>
+                Content:
+              </Label>
               <Textarea
-                name="body"
-                required={true}
-                id="add-post-body"
-                value={formData.body}
+                maxHeight={13}
+                id={textareaId}
+                {...register("body")}
                 placeholder="Enter your post"
                 className={styles.contentArea}
-                onChange={handleInputChange}
               />
             </Form>
           </Accordion>
