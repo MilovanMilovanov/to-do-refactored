@@ -1,6 +1,7 @@
-import { FormEvent, useCallback } from "react";
+import { useCallback } from "react";
 import { PostModel, updatePost } from "../../../features/user-posts/postsSlice";
 import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 
 import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
@@ -10,50 +11,53 @@ import Button from "../../atoms/button/Button";
 import Textarea from "../../atoms/textarea/Textarea";
 
 import styles from "../post/Post.module.scss";
-import useForm from "../../../hooks/useApi/useForm/useForm";
+import { PostFormModel } from "../post-list/PostList";
 
-function Post(props: PostModel) {
+function Post({ id, userId, ...postProps }: PostModel) {
   const { request } = useApi();
   const dispatch = useDispatch();
-  const { formData, resetForm, handleInputChange } = useForm<PostModel>(props);
+  const {
+    handleSubmit,
+    register,
+    getValues,
+    reset,
+    formState: { isDirty },
+  } = useForm<PostFormModel>({
+    values: postProps,
+    mode: "onChange",
+  });
 
+  const handleCancelChanges = useCallback(
+    () => reset(postProps),
+    [postProps, reset]
+  );
 
-  const handleCancelChanges = useCallback(() => (
-    resetForm(props)
-  ), [props]);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const onSubmit = () => {
     async function updateUserPost() {
       request({
         method: "PUT",
-        endpoint: `posts/${props.id}`,
-        body: JSON.stringify(formData),
+        endpoint: `posts/${id}`,
+        body: JSON.stringify(getValues()),
       });
 
-      dispatch(updatePost(formData));
+      dispatch(updatePost({ id, userId, ...getValues() }));
     }
-
     updateUserPost();
   };
-
-  const isFormDataChanged =
-    formData.title !== props.title || formData.body !== props.body;
 
   return (
     <div className={styles.post}>
       <Form
         className={styles.postForm}
         title="Post Form"
-        id={String(props.id)}
-        onSubmit={handleSubmit}
+        id={String(id)}
+        onSubmit={handleSubmit(onSubmit)}
         buttons={
           <div className={styles.btnContainer}>
             <Button
               type="reset"
               className={styles.revertChanges}
-              disabled={!isFormDataChanged}
+              disabled={!isDirty}
               onClick={handleCancelChanges}
             >
               revert changes
@@ -61,32 +65,32 @@ function Post(props: PostModel) {
             <Button
               type="submit"
               className={styles.submitChanges}
-              disabled={!isFormDataChanged}
+              disabled={!isDirty}
             >
               submit changes
             </Button>
           </div>
         }
       >
-        <Label htmlFor={`title-${formData.title}`} className={styles.postLabel}>Title:</Label>
+        <Label htmlFor={`title-${id}`} className={styles.postLabel}>
+          Title:
+        </Label>
         <Input
-          id={`${`title-${formData.title}`}`}
-          value={formData.title}
-          name="title"
+          id={`title-${id}`}
+          {...register("title")}
           className={styles.postInput}
           placeholder="Enter your title"
-          onChange={handleInputChange}
         />
 
-        <Label htmlFor={`body-${formData.body}`} className={styles.postLabel}>Content:</Label>
+        <Label htmlFor={`body-${id}`} className={styles.postLabel}>
+          Content:
+        </Label>
         <Textarea
-          className={styles.contentArea}
-          id={`body-${formData.body}`}
-          value={formData.body}
           maxHeight={13}
-          name="body"
+          id={`body-${id}`}
+          {...register("body")}
+          className={styles.contentArea}
           placeholder="Enter your post"
-          onChange={handleInputChange}
         />
       </Form>
     </div>

@@ -23,7 +23,7 @@ import Scrollable from "../../shared/scrollable/Scrollable";
 
 import styles from "./PostList.module.scss";
 
-type PostFormModel = Pick<PostModel, "title" | "body">;
+export type PostFormModel = Pick<PostModel, "title" | "body">;
 
 const initialFormData: PostFormModel = {
   title: "",

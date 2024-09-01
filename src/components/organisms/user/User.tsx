@@ -1,8 +1,4 @@
-import {
-  ReactNode,
-  useCallback,
-  useRef,
-} from "react";
+import { ReactNode, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { useForm } from "react-hook-form";
@@ -10,10 +6,14 @@ import {
   updateUser,
   UserModel,
 } from "../../../features/user-management/userSlice";
-import { formFields, autocompleteAttributes, validationRules } from "./constants/userFormConstants";
+import {
+  formFields,
+  autocompleteAttributes,
+  validationRules,
+} from "./constants/userFormConstants";
 
 import ValidationTooltip from "../../molecules/ValidationTooltip/ValidationTooltip";
-import InputErrorIcon from '../../../assets/icons/input-error-icon.svg';
+import InputErrorIcon from "../../../assets/icons/input-error-icon.svg";
 import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
 import Button from "../../atoms/button/Button";
@@ -33,28 +33,38 @@ function User({
   ...userProps
 }: UserModel & UserNavigation) {
   const { id: isSingleUserLoaded } = useParams();
-  const { handleSubmit, reset, getValues, register, formState: { isValid, isDirty, errors  } } = useForm<UserFormModel>({ values: userProps, mode: 'onChange' });
+  const {
+    handleSubmit,
+    reset,
+    getValues,
+    register,
+    formState: { isValid, isDirty, errors },
+  } = useForm<UserFormModel>({ values: userProps, mode: "onChange" });
   const dispatch = useDispatch();
   const inputRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const handleCancelChanges = useCallback(() => (
-    reset(userProps)
-  ), [userProps, reset]);
+  const handleCancelChanges = useCallback(
+    () => reset(userProps),
+    [userProps, reset]
+  );
 
   const onSubmit = () => dispatch(updateUser({ id, ...getValues() }));
 
   return (
     <div
-      className={`${styles.user} ${isSingleUserLoaded && styles['user--adjustUser']}`}
+      className={`${styles.user} ${
+        isSingleUserLoaded && styles["user--adjustUser"]
+      }`}
     >
-      {userNavigation &&
+      {userNavigation && (
         <div
-          className={`${styles.btnContainerNav} ${!isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
-            }`}
+          className={`${styles.btnContainerNav} ${
+            !isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
+          }`}
         >
           {userNavigation}
         </div>
-      }
+      )}
 
       <Form
         id={id}
@@ -81,7 +91,6 @@ function User({
           </div>
         }
       >
-
         {formFields.map(({ name, label, placeholder }) => {
           const inputId = `${name}-${id}`;
           const errorId = `${name}-error`;
@@ -97,14 +106,18 @@ function User({
               <Label className={styles.userLabel} htmlFor={inputId}>
                 {label}
               </Label>
-              <div className={styles.inputWrapper}
-                ref={(el) => inputRefs.current[name] = el}>
+              <div
+                className={styles.inputWrapper}
+                ref={(el) => (inputRefs.current[name] = el)}
+              >
                 <Input
                   id={inputId}
                   placeholder={placeholder}
                   autoComplete={autocompleteAttributes[name]}
                   aria-describedby={hasError && errorId}
-                  className={`${styles.userInput} ${hasError && styles['userInput--error']}`}
+                  className={`${styles.userInput} ${
+                    hasError && styles["userInput--error"]
+                  }`}
                   {...register(name, validationRules[name])}
                 />
                 {hasError && (
@@ -116,10 +129,10 @@ function User({
                 )}
               </div>
             </ValidationTooltip>
-          )
+          );
         })}
-      </Form >
-    </div >
+      </Form>
+    </div>
   );
 }
 
