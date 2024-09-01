@@ -39,7 +39,7 @@ function User({
 
   const handleCancelChanges = useCallback(() => (
     reset(userProps)
-  ), [userProps]);
+  ), [userProps, reset]);
 
   const onSubmit = () => dispatch(updateUser({ id, ...getValues() }));
 
