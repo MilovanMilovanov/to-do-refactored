@@ -17,13 +17,13 @@
     margin: 0 auto;
 
     fieldset {
-      gap: 0.8rem;
+      gap: 0.7rem;
     }
 
     .inputWrapper {
       @include flex-layout($justify: center);
       position: relative;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
 
       .errorIcon {
         width: 1.3rem;
@@ -36,7 +36,7 @@
       .userInput {
         padding-right: 1.8rem;
         transition: ease-in-out 0.2s;
-        height: 2.2rem;
+        height: 2.1rem;
         width: 100%;
         color: var(--text-color-default-brown);
 
@@ -59,11 +59,10 @@
           }
         }
       }
-
     }
 
     .userLabel {
-      font-family: "Helvetica Neue-Roman", 'sans-serif';
+      font-family: "Helvetica Neue-Roman", "sans-serif";
       text-align: left;
     }
   }
@@ -72,7 +71,6 @@
     @include flex-layout($justify: space-between, $align: center);
     padding: 1rem 0.2rem 0.5em 0.2rem;
     height: fit-content;
-
 
     &--positionCenter {
       @include flex-layout($justify: center);

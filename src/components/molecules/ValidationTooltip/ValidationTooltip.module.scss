@@ -1,13 +1,13 @@
 @import "../../../global.scss";
 
 .tooltipError {
-    @include flex-layout($justify: center, $align: center);
-    position: absolute;
-    top: 2.2rem;
-    width: 100%;
-    height: 100%;
-    color: var(--text-color-default-white);
-    background: var(--error-bg-color);
-    font-family: "Helvetica Neue-Roman", 'sans-serif';
-    font-size: 0.9rem;
+  @include flex-layout($justify: center, $align: center);
+  position: absolute;
+  top: 2.1rem;
+  width: 100%;
+  height: 100%;
+  color: var(--text-color-default-white);
+  background: var(--error-bg-color);
+  font-family: "Helvetica Neue-Roman", "sans-serif";
+  font-size: 0.9rem;
 }
