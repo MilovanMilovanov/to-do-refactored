@@ -11,3 +11,11 @@
   font-family: "Helvetica Neue-Roman", "sans-serif";
   font-size: 0.9rem;
 }
+
+.errorIcon {
+  width: 1.3rem;
+  fill: var(--icon-color-error);
+  height: 100%;
+  position: absolute;
+  right: 0.4rem;
+}

@@ -1,8 +1,10 @@
 import { HTMLAttributes } from "react";
 import { createPortal } from "react-dom";
+import { FieldError } from "react-hook-form";
+
+import ErrorIcon from "../../../assets/icons/error-icon.svg";
 
 import styles from "./ValidationTooltip.module.scss";
-import { FieldError } from "react-hook-form";
 
 interface ValidationTooltipModel extends HTMLAttributes<HTMLElement> {
     portalTarget: HTMLDivElement | null;
@@ -20,11 +22,18 @@ function ValidationTooltip({
             {children}
             {error &&
                 createPortal(
-                    <span
-                        id={id}
-                        role="tooltip"
-                        aria-live="assertive"
-                        className={styles.tooltipError}>{error.message}</span>,
+                    <>
+                        <span
+                            id={id}
+                            role="tooltip"
+                            aria-live="assertive"
+                            className={styles.tooltipError}>{error.message}</span>
+                        <ErrorIcon
+                            role="img"
+                            aria-label="error icon"
+                            className={styles.errorIcon}
+                        />
+                    </>,
                     portalTarget as Element
                 )}
         </>

@@ -25,14 +25,6 @@
       position: relative;
       margin-bottom: 0.3rem;
 
-      .errorIcon {
-        width: 1.3rem;
-        fill: var(--icon-color-error);
-        height: 100%;
-        position: absolute;
-        right: 0.4rem;
-      }
-
       .userInput {
         padding-right: 1.8rem;
         transition: ease-in-out 0.2s;

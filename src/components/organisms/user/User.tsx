@@ -13,7 +13,6 @@ import {
 } from "./constants/userFormConstants";
 
 import ValidationTooltip from "../../molecules/ValidationTooltip/ValidationTooltip";
-import InputErrorIcon from "../../../assets/icons/input-error-icon.svg";
 import Form from "../../molecules/form/Form";
 import Input from "../../atoms/input/Input";
 import Button from "../../atoms/button/Button";
@@ -120,13 +119,6 @@ function User({
                   }`}
                   {...register(name, validationRules[name])}
                 />
-                {hasError && (
-                  <InputErrorIcon
-                    role="img"
-                    aria-label="error icon"
-                    className={styles.errorIcon}
-                  />
-                )}
               </div>
             </ValidationTooltip>
           );
