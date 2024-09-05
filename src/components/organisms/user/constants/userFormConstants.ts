@@ -37,11 +37,11 @@ export const validationRules: Record<keyof UserFormModel, any> = {
 };
 
 export const formFields: FormFieldModel[] = [
-    { name: 'username', label: 'Name:', placeholder: 'Enter Name' },
-    { name: 'email', label: 'Email:', placeholder: 'Enter Email' },
-    { name: 'city', label: 'City:', placeholder: 'Enter City' },
-    { name: 'street', label: 'Street:', placeholder: 'Enter Street' },
-    { name: 'suite', label: 'Suite:', placeholder: 'Enter Suite' },
+    { name: 'username', label: 'Name', placeholder: 'Enter Name' },
+    { name: 'email', label: 'Email', placeholder: 'Enter Email' },
+    { name: 'city', label: 'City', placeholder: 'Enter City' },
+    { name: 'street', label: 'Street', placeholder: 'Enter Street' },
+    { name: 'suite', label: 'Suite', placeholder: 'Enter Suite' },
 ];
 
 export const autocompleteAttributes: Record<keyof UserFormModel, string> = {

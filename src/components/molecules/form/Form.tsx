@@ -15,8 +15,8 @@ function Form({
 }: FormModel) {
   return (
     <form id={id} className={className} onSubmit={onSubmit}>
-      <fieldset>
-        <legend>{title}</legend>
+      <fieldset role="group" aria-labelledby={`${title}-legend`}>
+        <legend id={`${title}-legend`}>{title}</legend>
         {children}
         {buttons}
       </fieldset>

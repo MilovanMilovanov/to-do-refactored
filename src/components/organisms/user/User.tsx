@@ -51,15 +51,13 @@ function User({
 
   return (
     <div
-      className={`${styles.user} ${
-        isSingleUserLoaded && styles["user--adjustUser"]
-      }`}
+      className={`${styles.user} ${isSingleUserLoaded && styles["user--adjustUser"]
+        }`}
     >
       {userNavigation && (
         <div
-          className={`${styles.btnContainerNav} ${
-            !isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
-          }`}
+          className={`${styles.btnContainerNav} ${!isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
+            }`}
         >
           {userNavigation}
         </div>
@@ -102,11 +100,10 @@ function User({
               error={hasError}
               portalTarget={inputRefs.current[name]}
             >
-              <Label className={styles.userLabel} htmlFor={inputId}>
-                {label}
-              </Label>
+
               <div
-                className={styles.inputWrapper}
+                className={`${styles.inputWrapper}
+                 ${hasError && styles["inputWrapper--error"]}`}
                 ref={(el) => (inputRefs.current[name] = el)}
               >
                 <Input
@@ -114,11 +111,12 @@ function User({
                   placeholder={placeholder}
                   autoComplete={autocompleteAttributes[name]}
                   aria-describedby={hasError && errorId}
-                  className={`${styles.userInput} ${
-                    hasError && styles["userInput--error"]
-                  }`}
+                  className={styles.userInput}
                   {...register(name, validationRules[name])}
                 />
+                <Label className={styles.userLabel} htmlFor={inputId}>
+                  {label}
+                </Label>
               </div>
             </ValidationTooltip>
           );

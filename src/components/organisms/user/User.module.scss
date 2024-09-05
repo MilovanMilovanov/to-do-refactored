@@ -1,5 +1,6 @@
 @import "../../../global.scss";
 
+
 .user {
   box-sizing: border-box;
   overflow: hidden;
@@ -17,28 +18,63 @@
     margin: 0 auto;
 
     fieldset {
-      gap: 0.7rem;
+      gap: 2.8rem;
     }
 
     .inputWrapper {
-      @include flex-layout($justify: center);
-      position: relative;
-      margin-bottom: 0.3rem;
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr;
+      align-items: center;
+
+      .userLabel {
+        z-index: 3;
+        grid-area: 1 / 1;
+        margin-left: 0.9rem;
+        transition: ease-in-out 0.15s;
+        width: fit-content;
+        color: var(--text-color-default-brown);
+        font-family: "Helvetica Neue-Roman", "sans-serif";
+      }
 
       .userInput {
+        grid-area: 1 / 1;
         padding-right: 1.8rem;
-        transition: ease-in-out 0.2s;
-        height: 2.1rem;
         width: 100%;
-        color: var(--text-color-default-brown);
+        height: 2.6rem;
+        color: var(--text-color-default-white);
+        background: var(--input-bg-focus);
 
         &:focus {
           color: var(--text-color-default-white);
           border: 0.1rem solid var(--outline-color);
-          background: var(--input-bg-focus);
         }
 
-        &--error {
+        &:not(:focus) {
+          &::placeholder {
+            color: transparent;
+          }
+        }
+      }
+
+      .userInput:not(:placeholder-shown)~.userLabel {
+        @include label_styles();
+      }
+
+      &--error {
+
+        &:not(:focus-within) {
+          .userLabel {
+            @include createLabelBackgroundAnimation(var(--error-bg-color), 'errorLabelBackgroundAnimation');
+            animation: errorLabelBackgroundAnimation 0.4s ease forwards;
+          }
+
+          .userInput {
+            color: var(--text-color-default-brown);
+          }
+        }
+
+        .userInput {
           border: 0.1rem solid var(--border-color-input-error);
           border-radius: unset;
 
@@ -51,12 +87,16 @@
           }
         }
       }
+
+      &:focus-within {
+        .userLabel {
+          @include label_styles();
+          @include createLabelBackgroundAnimation(var(--input-bg-focus), 'focusLabelBackgroundAnimation');
+          animation: focusLabelBackgroundAnimation 0.4s ease forwards;
+        }
+      }
     }
 
-    .userLabel {
-      font-family: "Helvetica Neue-Roman", "sans-serif";
-      text-align: left;
-    }
   }
 
   .btnContainerNav {
@@ -71,7 +111,6 @@
 
   .btnContainerForm {
     @include flex-layout($justify: space-between, $align: center);
-    margin-top: 1rem;
   }
 
   .revertChanges,
@@ -81,8 +120,6 @@
     letter-spacing: 0.05rem;
     color: var(--text-color-button-default);
     background: var(--link-bg-color-user-posts);
-    border-radius: 0.3rem;
-    border: none;
 
     &:hover {
       color: var(--text-color-default-white);

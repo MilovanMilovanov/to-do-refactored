@@ -53,6 +53,28 @@
   --scrollbar-thumb-color: rgba(0, 255, 255, 0.508);
 }
 
+@mixin label_styles {
+  transform: translateY(-110%);
+  font-size: 0.8rem;
+  color: var(--text-color-button-default);
+}
+
+@mixin createLabelBackgroundAnimation($color, $animationName) {
+  @keyframes #{$animationName} {
+    0% {
+      padding: 0;
+      background: transparent;
+    }
+
+    100% {
+      padding: 0 0.45rem;
+      margin-left: 0.45rem;
+      background: linear-gradient(to bottom, transparent 50%, $color 50%);
+    }
+  }
+}
+
+
 @keyframes highlightText {
   50% {
     color: var(--text-color-default-white);
@@ -68,14 +90,12 @@
   gap: $gap;
 }
 
-@mixin glass-hover-effect(
-  $transition-time: 0.4s,
+@mixin glass-hover-effect($transition-time: 0.4s,
   $hover-time: 0.7s,
   $skew-angle: -30deg,
   $start-color: rgba(255, 255, 255, 0),
   $mid-color: rgba(255, 255, 255, 0.197),
-  $end-color: rgba(255, 255, 255, 0)
-) {
+  $end-color: rgba(255, 255, 255, 0)) {
   overflow: hidden;
   position: relative;
   transition: background $transition-time ease-in-out;
@@ -89,12 +109,10 @@
     transform: skewX($skew-angle);
     width: 200%;
     height: 100%;
-    background: linear-gradient(
-      120deg,
-      $start-color 30%,
-      $mid-color 50%,
-      $end-color 70%
-    );
+    background: linear-gradient(120deg,
+        $start-color 30%,
+        $mid-color 50%,
+        $end-color 70%);
   }
 
   &:hover::before {
@@ -180,7 +198,18 @@ textarea {
   outline: none;
   border: none;
   resize: none;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    caret-color: var(--text-color-default-white);
+    -webkit-text-fill-color: var(--text-color-default-white);
+    -webkit-box-shadow: 0 0 0 1000px var(--input-bg-focus) inset;
+  }
 }
+
+
 
 button,
 select,
