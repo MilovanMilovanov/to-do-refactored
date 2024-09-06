@@ -1,6 +1,5 @@
 @import "../../../global.scss";
 
-
 .user {
   box-sizing: border-box;
   overflow: hidden;
@@ -46,27 +45,38 @@
         background: var(--input-bg-focus);
 
         &:focus {
-          color: var(--text-color-default-white);
           border: 0.1rem solid var(--outline-color);
         }
 
-        &:not(:focus) {
-          &::placeholder {
-            color: transparent;
-          }
+        &:not(:focus)::placeholder {
+          color: transparent;
         }
       }
 
-      .userInput:not(:placeholder-shown)~.userLabel {
+      .userInput:not(:placeholder-shown) ~ .userLabel {
         @include label_styles();
       }
 
-      &--error {
+      &:focus-within {
+        .userLabel {
+          @include label_styles();
+          @include createLabelBackgroundAnimation(
+            var(--input-bg-focus),
+            "focusLabelBackgroundAnimation"
+          );
+          animation: focusLabelBackgroundAnimation 0.4s ease forwards;
+        }
+      }
 
+      &--error {
         &:not(:focus-within) {
-          .userLabel {
-            @include createLabelBackgroundAnimation(var(--error-bg-color), 'errorLabelBackgroundAnimation');
-            animation: errorLabelBackgroundAnimation 0.4s ease forwards;
+          .userInput:not(:placeholder-shown) ~ .userLabel {
+            @include createLabelBackgroundAnimation(
+              var(--error-bg-color),
+              "errorLabelBackgroundAnimation"
+            );
+            color: var(--text-color-default-white);
+            animation: errorLabelBackgroundAnimation 0s ease forwards;
           }
 
           .userInput {
@@ -87,20 +97,15 @@
           }
         }
       }
-
-      &:focus-within {
-        .userLabel {
-          @include label_styles();
-          @include createLabelBackgroundAnimation(var(--input-bg-focus), 'focusLabelBackgroundAnimation');
-          animation: focusLabelBackgroundAnimation 0.4s ease forwards;
-        }
-      }
     }
+  }
 
+  .btnContainerNav,
+  .btnContainerForm {
+    @include flex-layout($justify: space-between, $align: center);
   }
 
   .btnContainerNav {
-    @include flex-layout($justify: space-between, $align: center);
     padding: 1rem 0.2rem 0.5em 0.2rem;
     height: fit-content;
 
@@ -109,12 +114,8 @@
     }
   }
 
-  .btnContainerForm {
-    @include flex-layout($justify: space-between, $align: center);
-  }
-
-  .revertChanges,
-  .submitChanges,
+  .btnRevertChanges,
+  .btnSaveChanges,
   .btnContainerNav button {
     padding: 0.5rem;
     letter-spacing: 0.05rem;
@@ -127,8 +128,8 @@
     }
   }
 
-  .revertChanges,
-  .submitChanges {
+  .btnRevertChanges,
+  .btnSaveChanges {
     &:not(:disabled) {
       animation: highlightText 0.4s linear;
     }

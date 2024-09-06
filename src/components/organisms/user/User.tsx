@@ -51,13 +51,15 @@ function User({
 
   return (
     <div
-      className={`${styles.user} ${isSingleUserLoaded && styles["user--adjustUser"]
-        }`}
+      className={`${styles.user} ${
+        isSingleUserLoaded ? styles["user--adjustUser"] : ""
+      }`}
     >
       {userNavigation && (
         <div
-          className={`${styles.btnContainerNav} ${!isSingleUserLoaded && styles["btnContainerNav--positionCenter"]
-            }`}
+          className={`${styles.btnContainerNav} ${
+            !isSingleUserLoaded ? styles["btnContainerNav--positionCenter"] : ""
+          }`}
         >
           {userNavigation}
         </div>
@@ -72,7 +74,7 @@ function User({
           <div className={styles.btnContainerForm}>
             <Button
               type="reset"
-              className={styles.revertChanges}
+              className={styles.btnRevertChanges}
               disabled={!isDirty}
               onClick={handleCancelChanges}
             >
@@ -80,7 +82,7 @@ function User({
             </Button>
             <Button
               type="submit"
-              className={styles.submitChanges}
+              className={styles.btnSaveChanges}
               disabled={!isDirty || !isValid}
             >
               save changes
@@ -100,10 +102,9 @@ function User({
               error={hasError}
               portalTarget={inputRefs.current[name]}
             >
-
               <div
                 className={`${styles.inputWrapper}
-                 ${hasError && styles["inputWrapper--error"]}`}
+                ${hasError ? styles["inputWrapper--error"] : ""}`}
                 ref={(el) => (inputRefs.current[name] = el)}
               >
                 <Input
