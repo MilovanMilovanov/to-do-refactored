@@ -101,7 +101,7 @@ function PostList() {
     >
       <Scrollable
         className={`${styles.postList} ${
-          isPopupOpen && styles["postList--removeBorder"]
+          isPopupOpen ? styles["postList--removeBorder"] : ""
         }`}
         tagName={"ul"}
         isScrollingEnabled={!isPopupOpen}

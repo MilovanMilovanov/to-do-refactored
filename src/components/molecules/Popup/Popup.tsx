@@ -13,7 +13,7 @@ interface PopupModel extends HTMLAttributes<HTMLElement> {
 
 function Popup({
   role = "dialog",
-  className = '',
+  className = "",
   isOpen,
   message,
   children,
@@ -35,14 +35,18 @@ function Popup({
             role={role}
             aria-labelledby="popup-title"
             aria-modal="true"
-            className={`${styles.modal} ${className}`}>
+            className={`${styles.modal} ${className}`}
+          >
             <div className={styles.content}>
               <h3 id="popup-title" className={styles.title}>
                 {message}
               </h3>
               <div className={styles.btnContainer}>
-                <Button onClick={handleConfirmation} aria-label="Confirm Deletion">
-                  Delete
+                <Button
+                  onClick={handleConfirmation}
+                  aria-label="Confirm Deletion"
+                >
+                  Confirm
                 </Button>
                 <Button onClick={handleCancel} aria-label="Cancel Deletion">
                   Cancel
@@ -52,9 +56,9 @@ function Popup({
           </div>
           {children}
         </section>
-      ) :
+      ) : (
         children
-      }
+      )}
     </>
   );
 }

@@ -10,7 +10,7 @@
   box-shadow: 0 0 1.5rem -0.7rem var(--box-shadow-color);
 
   .modal {
-    @include flex-layout($align: center );
+    @include flex-layout($align: center);
     box-sizing: border-box;
     position: absolute;
     z-index: 2;
