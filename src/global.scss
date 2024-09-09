@@ -1,3 +1,5 @@
+@import "./mixins.scss";
+
 :root {
   --app-bg-color: #242424;
   --app-text-color: rgba(255, 255, 255, 0.87);
@@ -53,73 +55,6 @@
   --scrollbar-thumb-color: rgba(0, 255, 255, 0.508);
 
   --glass-hover-bg-highlight: rgba(255, 255, 255, 0.2);
-}
-
-@mixin label_styles {
-  transform: translateY(-110%);
-  font-size: 0.8rem;
-  color: var(--text-color-button-default);
-}
-
-@mixin createLabelBackgroundAnimation($color, $animationName) {
-  @keyframes #{$animationName} {
-    0% {
-      padding: 0;
-      background: transparent;
-    }
-
-    100% {
-      padding: 0 0.3rem;
-      margin-left: 0.45rem;
-      background: linear-gradient(to bottom, transparent 50%, $color 50%);
-    }
-  }
-}
-
-@keyframes highlightText {
-  50% {
-    color: var(--text-color-default-white);
-    text-shadow: 0.1rem 0.1rem 2rem var(--text-color-default-white);
-  }
-}
-
-@mixin flex-layout($direction: row, $gap: 0, $justify: unset, $align: unset) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-  gap: $gap;
-}
-
-@mixin glass-hover-effect(
-  $transition-time: 0.7s,
-  $skew-angle: -30deg,
-  $base-color: transparent,
-  $mid-color: var(--glass-hover-bg-highlight)
-) {
-  overflow: hidden;
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateX(-75%) skewX($skew-angle);
-    transition: transform $transition-time ease-in-out;
-    width: 200%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      $base-color 30%,
-      $mid-color 50%,
-      $base-color 70%
-    );
-  }
-
-  &:hover::before {
-    transform: translateX(100%) skewX($skew-angle);
-  }
 }
 
 @font-face {
