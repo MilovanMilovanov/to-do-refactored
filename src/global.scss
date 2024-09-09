@@ -51,6 +51,8 @@
   --error-bg-color-onBlur: rgb(246, 195, 195);
 
   --scrollbar-thumb-color: rgba(0, 255, 255, 0.508);
+
+  --glass-hover-bg-highlight: rgba(255, 255, 255, 0.2);
 }
 
 @mixin label_styles {
@@ -67,13 +69,12 @@
     }
 
     100% {
-      padding: 0 0.45rem;
+      padding: 0 0.3rem;
       margin-left: 0.45rem;
       background: linear-gradient(to bottom, transparent 50%, $color 50%);
     }
   }
 }
-
 
 @keyframes highlightText {
   50% {
@@ -90,34 +91,34 @@
   gap: $gap;
 }
 
-@mixin glass-hover-effect($transition-time: 0.4s,
-  $hover-time: 0.7s,
+@mixin glass-hover-effect(
+  $transition-time: 0.7s,
   $skew-angle: -30deg,
-  $start-color: rgba(255, 255, 255, 0),
-  $mid-color: rgba(255, 255, 255, 0.197),
-  $end-color: rgba(255, 255, 255, 0)) {
+  $base-color: transparent,
+  $mid-color: var(--glass-hover-bg-highlight)
+) {
   overflow: hidden;
   position: relative;
-  transition: background $transition-time ease-in-out;
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
-    left: -140%;
-    transition: all $transition-time ease-in-out;
-    transform: skewX($skew-angle);
+    left: 0;
+    transform: translateX(-75%) skewX($skew-angle);
+    transition: transform $transition-time ease-in-out;
     width: 200%;
     height: 100%;
-    background: linear-gradient(120deg,
-        $start-color 30%,
-        $mid-color 50%,
-        $end-color 70%);
+    background: linear-gradient(
+      120deg,
+      $base-color 30%,
+      $mid-color 50%,
+      $base-color 70%
+    );
   }
 
   &:hover::before {
-    left: 100%;
-    transition: all $hover-time ease-in-out;
+    transform: translateX(100%) skewX($skew-angle);
   }
 }
 
@@ -208,8 +209,6 @@ textarea {
     -webkit-box-shadow: 0 0 0 1000px var(--input-bg-focus) inset;
   }
 }
-
-
 
 button,
 select,

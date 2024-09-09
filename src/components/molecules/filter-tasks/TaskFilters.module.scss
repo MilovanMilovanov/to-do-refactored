@@ -6,10 +6,15 @@
   .filtersForm {
     margin: 0;
     width: 100%;
-    
+
     fieldset {
-      @include flex-layout($direction: row, $gap: 1rem, $justify: center, $align: center);
-      @include glass-hover-effect($hover-time: 0.5s);
+      @include flex-layout(
+        $direction: row,
+        $gap: 1rem,
+        $justify: center,
+        $align: center
+      );
+      @include glass-hover-effect($transition-time: 0.8s);
       position: relative;
       margin: 0;
       padding: 1.4rem 0 1.2rem 0;
@@ -36,7 +41,7 @@
         &:hover {
           background: var(--button-bg-hover-default);
         }
-        
+
         &--byTitle:focus {
           transition: ease-in-out 0.1s;
           border: solid 0.1rem #0392f8;
@@ -44,9 +49,8 @@
 
         &:focus {
           background: var(--filter-bg-color-focus);
-        } 
+        }
       }
     }
   }
-
 }
