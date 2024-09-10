@@ -25,6 +25,7 @@ function TaskTable({ paginatedTasks, handleTaskStatusChange }: TaskTableModel) {
       </thead>
       <Scrollable
         tagName="tbody"
+        isScrollingEnabled={Boolean(paginatedTasks.length)}
         className={styles.tableBody}
         scrollWidth={0.8}
       >

@@ -4,8 +4,8 @@
   @include flex-layout($direction: column);
   overflow: hidden;
   padding: 0.1rem;
-  min-width: 40rem;
-  width: 50rem;
+  min-width: 20rem;
+  max-width: 50rem;
   height: calc(100vh - 13.5rem);
   box-shadow: inset 0 0 0.1rem 0.1rem var(--border-color-default);
   border-radius: 0 0 0.5rem 0.5rem;
@@ -34,7 +34,6 @@
     padding-right: 2.5rem;
   }
 
-
   .tableHead {
     display: table;
     padding: 0.3rem;
@@ -44,7 +43,7 @@
   }
 
   .tableBody {
-    border: none;
+    border-radius: inherit;
 
     .row {
       &:hover {
@@ -54,30 +53,27 @@
       td {
         padding: 0 0.5rem;
       }
-    }
 
-    .btnChangeTaskStatus {
-      margin: 0.2rem 0.5rem;
-      padding: 0.4rem;
-      width: 5rem;
-      color: var(--text-color-button-default);
-      background: var(--button-bg-pagination);
-      border-radius: 0.3rem;
+      .btnChangeTaskStatus {
+        margin: 0.2rem 0;
+        height: 2.7rem;
+        width: 5rem;
+        color: var(--text-color-button-default);
+        background: var(--button-bg-pagination);
 
-      &:hover {
-        color: var(--text-color-default-white);
-        background: var(--button-bg-pagination-hover);
-        box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
+        &:hover {
+          color: var(--text-color-default-white);
+          background: var(--button-bg-pagination-hover);
+          box-shadow: 0 0 0.2rem 0 var(--box-shadow-color);
+        }
       }
     }
   }
-
 }
 
 .noFilterMatchContainer {
   @include flex-layout($justify: center, $align: center);
   height: calc(100vh - 15rem);
-  pointer-events: none;
 
   .noFilterMatchMessage {
     font-size: 1.1rem;
