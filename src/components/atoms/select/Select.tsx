@@ -1,24 +1,28 @@
-import { SelectHTMLAttributes } from "react";
+import { forwardRef, Ref, SelectHTMLAttributes } from "react";
 
 interface SelectModel extends SelectHTMLAttributes<HTMLSelectElement> {
   filterDefaultText: string;
   options: string[];
 }
 
-function Select({
-  id,
-  name,
-  value,
-  options,
-  className = "",
-  filterDefaultText,
-  onChange,
-}: SelectModel) {
+function Select(
+  {
+    id,
+    name,
+    value,
+    options,
+    className = "",
+    filterDefaultText,
+    onChange,
+  }: SelectModel,
+  forwardedRef: Ref<HTMLSelectElement>
+) {
   return (
     <select
       id={id}
       name={name}
       value={value}
+      ref={forwardedRef}
       className={className}
       onChange={onChange}
     >
@@ -34,4 +38,4 @@ function Select({
   );
 }
 
-export default Select;
+export default forwardRef(Select);

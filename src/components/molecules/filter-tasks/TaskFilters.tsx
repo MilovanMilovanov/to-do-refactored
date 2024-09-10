@@ -1,4 +1,5 @@
-import { SetStateAction, useEffect } from "react";
+import { SetStateAction, useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
 
 import Select from "../../atoms/select/Select";
@@ -6,7 +7,6 @@ import Input from "../../atoms/input/Input";
 import Form from "../form/Form";
 
 import styles from "./TaskFilters.module.scss";
-import useForm from "../../../hooks/useApi/useForm/useForm";
 
 interface FiltersModel {
   userIds: string[];
@@ -18,25 +18,30 @@ interface FiltersModel {
 interface FIltersFormModel {
   title: string;
   status: string;
-  userId: number;
+  userId: number | null;
 }
 
 const initialFormData = {
   title: "",
   status: "",
-  userId: 0,
+  userId: null,
 };
 
 function TaskFilters({
   tasks,
   userIds,
   statusFilterOptions,
-  setFilteredTasks
+  setFilteredTasks,
 }: FiltersModel) {
-  const { formData: {status, title, userId}, handleInputChange } = useForm<FIltersFormModel>(initialFormData);
+  const { register, watch } = useForm<FIltersFormModel>({
+    values: initialFormData,
+    mode: "onChange",
+  });
 
-  useEffect(() => {
-    const filteredData = tasks.filter((task: TaskModel) => {
+  const { userId, title, status } = watch();
+
+  const filterTasks = useCallback(() => {
+    return tasks.filter((task: TaskModel) => {
       const statusMatches =
         !status ||
         status === "all" ||
@@ -50,35 +55,31 @@ function TaskFilters({
 
       return statusMatches && titleMatches && userIdMatches;
     });
+  }, [status, title, userId, tasks]);
 
-    setFilteredTasks(filteredData);
-  }, [status, title, userId, tasks, setFilteredTasks]);
+  useEffect(() => {
+    setFilteredTasks(filterTasks());
+  }, [filterTasks, setFilteredTasks]);
 
   return (
     <section className={styles.container}>
       <Form className={styles.filtersForm} title="Task Filter">
         <Input
-          name="title"
-          value={title}
+          {...register("title")}
           placeholder="Filter by title"
-          className={`${styles.filter} ${styles['filter--byTitle']}`}
-          onChange={handleInputChange}
+          className={`${styles.filter} ${styles["filter--byTitle"]}`}
         />
         <Select
-          name="userId"
-          value={userId}
+          {...register("userId")}
           options={userIds}
           className={styles.filter}
           filterDefaultText="Filter by user id"
-          onChange={handleInputChange}
         />
         <Select
-          name="status"
-          value={status}
+          {...register("status")}
           options={statusFilterOptions}
           className={styles.filter}
           filterDefaultText="Filter by status"
-          onChange={handleInputChange}
         />
       </Form>
     </section>

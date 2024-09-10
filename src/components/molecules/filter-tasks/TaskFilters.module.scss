@@ -22,15 +22,17 @@
       border-bottom: none;
       border-radius: 2rem 2rem 0 0;
       background: var(--filter-bg-color);
-
       legend {
         margin-bottom: -0.8rem;
       }
 
       .filter {
+        z-index: 1;
+        padding: 0.2rem;
         min-width: 7rem;
         height: 2rem;
         border-radius: 0.3rem;
+        border: 0.1rem solid transparent;
         color: var(--text-color-default-white);
         background: var(--button-bg-pagination);
 
@@ -42,13 +44,13 @@
           background: var(--button-bg-hover-default);
         }
 
-        &--byTitle:focus {
-          transition: ease-in-out 0.1s;
-          border: solid 0.1rem #0392f8;
-        }
-
         &:focus {
           background: var(--filter-bg-color-focus);
+        }
+
+        &--byTitle:focus {
+          transition: ease-in-out 0.1s;
+          border: solid 0.1rem var(--outline-color);
         }
       }
     }
