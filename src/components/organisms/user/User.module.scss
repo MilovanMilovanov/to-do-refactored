@@ -109,7 +109,6 @@
   .btnContainerNav {
     padding: 1rem 0.2rem 0.5em 0.2rem;
     height: fit-content;
-
     &--positionCenter {
       @include flex-layout($justify: center);
     }
@@ -118,7 +117,6 @@
   .btnRevertChanges,
   .btnSaveChanges,
   .btnContainerNav button {
-    width: 5rem;
     padding: 0.5rem;
     letter-spacing: 0.05rem;
     color: var(--text-color-button-default);
@@ -132,6 +130,8 @@
 
   .btnRevertChanges,
   .btnSaveChanges {
+    width: 5rem;
+
     &:not(:disabled) {
       animation: highlightText 0.4s linear;
     }
