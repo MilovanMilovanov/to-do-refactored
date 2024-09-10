@@ -1,18 +1,14 @@
 @import "../../../global.scss";
 
 .navigation {
-  @include flex-layout($gap: 1rem, $justify: center);
-  width: 100%;
-  margin-top: 0.8rem;
-
-  .prevBtn, .nextBtn {
-    @include flex-layout( $justify: center, $align: center);
-    padding: 0.5rem;
+  @include flex-layout($gap: 1rem, $justify: center, $align: center);
+  padding: 1rem;
+  .prevBtn,
+  .nextBtn {
     width: 5rem;
     height: 2rem;
-    border-radius: 0.3rem;
     color: var(--btn-default-color);
-    background: var(--button-bg-confirmation-popup);
+    background: var(--button-bg-pagination);
 
     &:hover {
       font-size: 1.1rem;

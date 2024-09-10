@@ -61,6 +61,10 @@ function TaskList() {
     [request, dispatch]
   );
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredTasks]);
+
   const paginatedTasks = filteredTasks.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE

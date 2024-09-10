@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch, useMemo } from "react";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
 
 import Button from "../../atoms/button/Button";
@@ -18,15 +18,19 @@ function Pagination({
   tasks,
   pageSize,
 }: PaginationModel) {
+  const totalPages = useMemo(
+    () => Math.ceil(tasks.length / pageSize),
+    [tasks.length, pageSize]
+  );
+
   const incrementPage = () => {
-    setCurrentPage((prev) =>
-      Math.max(1, Math.min(prev + 1, Math.ceil(tasks.length / pageSize)))
-    );
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
 
   const decrementPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
+
   return (
     <section className={styles.navigation}>
       <Button
@@ -41,7 +45,7 @@ function Pagination({
       <Button
         className={styles.nextBtn}
         aria-label="Next Page"
-        disabled={currentPage === Math.ceil(tasks.length / pageSize)}
+        disabled={currentPage === totalPages || !totalPages}
         onClick={incrementPage}
       >
         Next
