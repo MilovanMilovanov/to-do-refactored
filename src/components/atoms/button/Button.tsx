@@ -1,13 +1,12 @@
 import { ButtonHTMLAttributes } from "react";
 
-interface ButtonModel extends ButtonHTMLAttributes<HTMLButtonElement> {
-  ariaLabel?: string;
-}
+type ButtonModel = ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
+  className = "",
   type = "button",
   disabled = false,
-  className = "",
+  "aria-label": ariaLabel,
   children,
   onClick,
 }: ButtonModel) {
@@ -15,6 +14,7 @@ function Button({
     <button
       type={type}
       disabled={disabled}
+      aria-label={ariaLabel}
       className={className}
       onClick={onClick}
     >

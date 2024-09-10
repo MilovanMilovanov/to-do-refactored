@@ -20,7 +20,9 @@ function Popup({
   action,
   setIsOpen,
 }: PopupModel) {
-  const handleConfirmation = () => {
+  if (!isOpen) return <>{children}</>;
+
+  const handleConfirm = () => {
     action();
     setIsOpen(false);
   };
@@ -28,38 +30,27 @@ function Popup({
   const handleCancel = () => setIsOpen(false);
 
   return (
-    <>
-      {isOpen ? (
-        <section className={styles.container}>
-          <div
-            role={role}
-            aria-labelledby="popup-title"
-            aria-modal="true"
-            className={`${styles.modal} ${className}`}
-          >
-            <div className={styles.content}>
-              <h3 id="popup-title" className={styles.title}>
-                {message}
-              </h3>
-              <div className={styles.btnContainer}>
-                <Button
-                  onClick={handleConfirmation}
-                  aria-label="Confirm Deletion"
-                >
-                  Confirm
-                </Button>
-                <Button onClick={handleCancel} aria-label="Cancel Deletion">
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
-          {children}
-        </section>
-      ) : (
-        children
-      )}
-    </>
+    <section
+      role={role}
+      aria-modal="true"
+      aria-labelledby="popup-title"
+      className={styles.container}
+    >
+      <div className={`${styles.content} ${className}`}>
+        <h3 id="popup-title" className={styles.title}>
+          {message}
+        </h3>
+        <div className={styles.btnContainer}>
+          <Button onClick={handleConfirm} aria-label="Confirm Deletion">
+            Confirm
+          </Button>
+          <Button onClick={handleCancel} aria-label="Cancel Deletion">
+            Cancel
+          </Button>
+        </div>
+      </div>
+      <div className={styles.children}>{children}</div>
+    </section>
   );
 }
 

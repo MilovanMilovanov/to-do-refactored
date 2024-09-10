@@ -69,27 +69,3 @@
     }
   }
 }
-
-.confirmDialog {
-  padding: 1.5rem 0;
-  color: var(--text-color-button-default);
-  background: var(--button-bg-confirmation-popup);
-  background: var(--popup-bg-color-content);
-
-  button {
-    @include flex-layout($justify: center, $align: center);
-    margin: 0.3rem;
-    padding: 0.5rem;
-    width: 5rem;
-    height: 2rem;
-    border-radius: 0.3rem;
-    color: var(--text-color-button-default);
-    background: var(--button-bg-confirmation-popup);
-
-    &:hover {
-      font-size: 1.1rem;
-      color: var(--text-color-default-white);
-      box-shadow: 0 0 0.4rem 0 var(--box-shadow-color);
-    }
-  }
-}
