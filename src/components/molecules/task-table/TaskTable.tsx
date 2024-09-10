@@ -12,11 +12,7 @@ interface TaskTableModel extends TableHTMLAttributes<HTMLTableElement> {
   handleTaskStatusChange: (id: number, completed: boolean) => void;
 }
 
-function TaskTable({
-  paginatedTasks,
-  handleTaskStatusChange
-}: TaskTableModel) {
-
+function TaskTable({ paginatedTasks, handleTaskStatusChange }: TaskTableModel) {
   return (
     <table className={`base-table ${styles.table}`}>
       <thead className={styles.tableHead}>
@@ -27,7 +23,11 @@ function TaskTable({
           <th className={styles.actions}>Actions</th>
         </tr>
       </thead>
-      <Scrollable tagName="tbody" className={styles.tableBody} scrollWidth={0.8}>
+      <Scrollable
+        tagName="tbody"
+        className={styles.tableBody}
+        scrollWidth={0.8}
+      >
         {paginatedTasks.length ? (
           paginatedTasks.map(({ id, title, completed }: TaskModel) => (
             <tr className={styles.row} key={id}>
@@ -38,6 +38,11 @@ function TaskTable({
               </td>
               <td className={styles.actions}>
                 <Button
+                  aria-label={
+                    completed
+                      ? "Mark task as incomplete"
+                      : "Mark task as complete"
+                  }
                   className={styles.btnChangeTaskStatus}
                   onClick={() => handleTaskStatusChange(id, completed)}
                 >

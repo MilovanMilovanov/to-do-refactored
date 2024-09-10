@@ -28,23 +28,25 @@ function Pagination({
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
   return (
-      <section className={styles.navigation}>
-        <Button
-          className={styles.prevBtn}
-          onClick={decrementPage}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span>Page {currentPage}</span>
-        <Button
-          className={styles.nextBtn}
-          onClick={incrementPage}
-          disabled={currentPage === Math.ceil(tasks.length / pageSize)}
-        >
-          Next
-        </Button>
-      </section>
+    <section className={styles.navigation}>
+      <Button
+        className={styles.prevBtn}
+        aria-label="Previous Page"
+        disabled={currentPage === 1}
+        onClick={decrementPage}
+      >
+        Previous
+      </Button>
+      <span>Page {currentPage}</span>
+      <Button
+        className={styles.nextBtn}
+        aria-label="Next Page"
+        disabled={currentPage === Math.ceil(tasks.length / pageSize)}
+        onClick={incrementPage}
+      >
+        Next
+      </Button>
+    </section>
   );
 }
 

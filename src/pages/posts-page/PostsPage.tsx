@@ -26,16 +26,20 @@ function PostsPage() {
     <>
       <PageNav />
       <Main className={styles.postsPageLayout}>
-        {user &&
-          <User key={id} {...user} userNavigation={
-            <>
-              <span>{user.username}</span>
-              <Link to="/">
-                <Button>Go back</Button>
-              </Link>
-            </>
-          } />
-        }
+        {user && (
+          <User
+            key={id}
+            {...user}
+            userNavigation={
+              <>
+                <span>{user.username}</span>
+                <Link to="/">
+                  <Button aria-label="Go back">Go back</Button>
+                </Link>
+              </>
+            }
+          />
+        )}
         <PostList />
       </Main>
     </>

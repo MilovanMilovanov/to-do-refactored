@@ -75,17 +75,19 @@ function User({
             <Button
               type="reset"
               className={styles.btnRevertChanges}
+              aria-label="Revert Changes"
               disabled={!isDirty}
               onClick={handleCancelChanges}
             >
-              revert changes
+              Revert Changes
             </Button>
             <Button
               type="submit"
+              aria-label="Save Changes"
               className={styles.btnSaveChanges}
               disabled={!isDirty || !isValid}
             >
-              save changes
+              Save Changes
             </Button>
           </div>
         }

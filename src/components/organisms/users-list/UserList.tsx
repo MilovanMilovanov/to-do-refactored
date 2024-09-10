@@ -29,10 +29,15 @@ function UsersList() {
             id={user.id}
             toggleElement={handleToggleCollapse}
           >
-            <User {...user} userNavigation={
-              <Link to={`posts/${user.id}`}>
-                <Button>{`Go to ${user.username}'s posts`}</Button>
-              </Link>}
+            <User
+              {...user}
+              userNavigation={
+                <Link to={`posts/${user.id}`}>
+                  <Button
+                    aria-label={`${`Go to ${user.username}'s posts`}`}
+                  >{`Go to ${user.username}'s posts`}</Button>
+                </Link>
+              }
             />
           </Accordion>
         </li>
