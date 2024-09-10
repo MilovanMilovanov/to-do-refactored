@@ -41,7 +41,7 @@
         grid-area: 1 / 1;
         padding-right: 1.8rem;
         width: 100%;
-        height: 2.6rem;
+        height: 2.4rem;
         color: var(--text-color-default-white);
         background: var(--input-bg-focus);
 
@@ -118,6 +118,7 @@
   .btnRevertChanges,
   .btnSaveChanges,
   .btnContainerNav button {
+    width: 5rem;
     padding: 0.5rem;
     letter-spacing: 0.05rem;
     color: var(--text-color-button-default);

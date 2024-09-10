@@ -113,7 +113,7 @@ function Post({ isAddPost, id, userId, ...postProps }: PostModelExtended) {
               aria-label="Revert Changes"
               onClick={handleCancelChanges}
             >
-              Revert Changes
+              Revert
             </Button>
             <Button
               type="submit"
@@ -121,7 +121,7 @@ function Post({ isAddPost, id, userId, ...postProps }: PostModelExtended) {
               aria-label="Save Changes"
               className={styles.submitChanges}
             >
-              Save Changes
+              Save
             </Button>
           </>
         )}

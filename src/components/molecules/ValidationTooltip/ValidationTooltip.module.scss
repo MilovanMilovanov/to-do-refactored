@@ -3,7 +3,7 @@
 .tooltipError {
   @include flex-layout($justify: center, $align: center);
   grid-area: 1 / 1;
-  transform: translateY(calc(100% + 0.2rem));
+  transform: translateY(calc(100% + 0.1rem));
   width: 100%;
   height: 2.2rem;
   color: var(--text-color-default-white);

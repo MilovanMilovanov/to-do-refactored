@@ -79,7 +79,7 @@ function User({
               disabled={!isDirty}
               onClick={handleCancelChanges}
             >
-              Revert Changes
+              Revert
             </Button>
             <Button
               type="submit"
@@ -87,7 +87,7 @@ function User({
               className={styles.btnSaveChanges}
               disabled={!isDirty || !isValid}
             >
-              Save Changes
+              Save
             </Button>
           </div>
         }

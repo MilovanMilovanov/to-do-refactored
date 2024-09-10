@@ -6,14 +6,15 @@
   background: var(--app-bg-color);
 
   .postForm {
-    margin: 0.5rem;
+    width: 100%;
+    margin: 0;
     fieldset {
+      gap: 0.6rem;
       padding: 0;
       border: none;
     }
 
     &--addPost {
-      margin: 0;
       fieldset {
         padding: 1rem;
         border: 0.2rem solid var(--border-color-default);
@@ -41,6 +42,7 @@
 
     .postLabel {
       text-align: left;
+      width: fit-content;
     }
   }
 
@@ -56,7 +58,7 @@
     .revertChanges,
     .submitChanges {
       padding: 0.5rem 0;
-      width: 7.4rem;
+      width: 6rem;
       letter-spacing: 0.05rem;
       border-radius: 0.3rem;
       color: var(--text-color-button-default);
