@@ -1,59 +1,71 @@
 @import "../../../global.scss";
 
 .post {
-  text-align: center;
-  margin-top: 0.9rem;
-  border: solid var(--border-color-default);
+  padding-top: 0.9rem;
   border-radius: 0.5rem;
   background: var(--app-bg-color);
 
   .postForm {
+    margin: 0.5rem;
     fieldset {
       padding: 0;
       border: none;
-
-    .postInput, .contentArea {
-        color: var(--text-color-default-brown);
-        transition: ease-in-out 0.1s;
-        height: 2.2rem;
-        &:focus {
-          color: var(--text-color-default-white);
-          border: solid 0.1rem var(--outline-color);
-          background: var(--input-bg-focus);
-        }
     }
 
-    .postInput {
+    &--addPost {
+      margin: 0;
+      fieldset {
+        padding: 1rem;
+        border: 0.2rem solid var(--border-color-default);
+      }
+    }
+
+    .postTitle,
+    .postContent {
       height: 2.2rem;
+      border: solid 0.1rem transparent;
+      color: var(--text-color-default-brown);
+
+      &:focus {
+        border: solid 0.1rem var(--outline-color);
+        color: var(--text-color-default-white);
+        background: var(--input-bg-focus);
+      }
     }
-    .postLabel {
-        text-align: left;
-    }
-    
-    .contentArea {
+
+    .postContent {
       box-sizing: content-box;
       scrollbar-width: thin;
       scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
     }
+
+    .postLabel {
+      text-align: left;
+    }
   }
-}
 
   .btnContainer {
     @include flex-layout($justify: space-between);
     padding-top: 0.5rem;
 
+    &--singleBtn {
+      @include flex-layout($justify: center);
+    }
+
+    .btnAddPost,
     .revertChanges,
     .submitChanges {
-      padding: 0.5rem;
+      padding: 0.5rem 0;
+      width: 7.4rem;
       letter-spacing: 0.05rem;
       border-radius: 0.3rem;
       color: var(--text-color-button-default);
       background: var(--link-bg-color-user-posts);
 
-        &:not(:disabled) {
-          animation: highlightText 0.4s linear;
-        }
-        
+      &:not(:disabled) {
+        animation: highlightText 0.4s linear;
+      }
+
       &:hover {
         color: var(--text-color-default-white);
         background: var(--button-bg-hover-default);

@@ -11,46 +11,6 @@
     border: none;
   }
 
-  .createPostForm {
-    margin: 0.5rem auto;
-
-    .postInput,
-    .contentArea {
-      color: var(--text-color-default-brown);
-      transition: ease-in-out 0.1s;
-      height: 2.2rem;
-      &:focus {
-        color: var(--text-color-default-white);
-        border: solid 0.1rem var(--outline-color);
-        background: var(--input-bg-focus);
-      }
-    }
-
-    .contentArea {
-      box-sizing: content-box;
-      scrollbar-width: thin;
-      scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-bg);
-    }
-
-    .labelText {
-      text-align: left;
-    }
-
-    .btnAddPost {
-      margin: 0.4rem auto 0 auto;
-      padding: 0.5rem;
-      width: 6rem;
-      height: 2rem;
-      color: var(--text-color-button-default);
-      background: var(--link-bg-color-user-posts);
-
-      &:hover {
-        color: var(--text-color-default-white);
-        background: var(--button-bg-hover-default);
-      }
-    }
-  }
-
   .postSection {
     @include flex-layout($gap: 1rem, $align: flex-start);
 

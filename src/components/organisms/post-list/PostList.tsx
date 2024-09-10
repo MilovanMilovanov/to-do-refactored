@@ -1,34 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { RootState } from "../../../store";
-import {
-  addPost,
-  deletePost,
-  PostModel,
-  setPosts,
-} from "../../../features/user-posts/postsSlice";
+import { deletePost, setPosts } from "../../../features/user-posts/postsSlice";
 
 import useApi from "../../../hooks/useApi/useApi";
 import Button from "../../atoms/button/Button";
-import Post from "../post/Post";
-import Form from "../../molecules/form/Form";
-import Input from "../../atoms/input/Input";
-import Label from "../../atoms/label/Label";
-import Textarea from "../../atoms/textarea/Textarea";
+import Post, { addPostFormId } from "../post/Post";
 import Accordion from "../accordion/Accordion";
 import Popup from "../../molecules/Popup/Popup";
 import Scrollable from "../../shared/scrollable/Scrollable";
 
 import styles from "./PostList.module.scss";
-
-export type PostFormModel = Pick<PostModel, "title" | "body">;
-
-const initialFormData: PostFormModel = {
-  title: "",
-  body: "",
-};
 
 function PostList() {
   const { id } = useParams();
@@ -36,10 +19,6 @@ function PostList() {
   const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [deleteItemId, setDeleteItemId] = useState<number>(0);
-  const { handleSubmit, register, getValues, reset } = useForm<PostFormModel>({
-    defaultValues: initialFormData,
-    mode: "onSubmit",
-  });
   const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
   const posts = useSelector((state: RootState) => state.userPosts[Number(id)]);
 
@@ -75,22 +54,6 @@ function PostList() {
     setDeleteItemId(id);
   };
 
-  const onSubmit = () => {
-    request({
-      method: "POST",
-      endpoint: "posts",
-      body: JSON.stringify(getValues()),
-    });
-
-    dispatch(addPost({ ...getValues(), userId: Number(id), id: 0 }));
-    setExpandedItemId(null);
-    reset(initialFormData);
-  };
-
-  const addPostFormId = "Add-post-form";
-  const titleInputId = "add-post-title";
-  const textareaId = "add-post-body";
-
   return (
     <Popup
       message={`Are you sure you want to delete post with id: ${deleteItemId}?`}
@@ -113,37 +76,7 @@ function PostList() {
             isCollapsed={expandedItemId !== "add-post"}
             toggleElement={() => handleTogglePost("add-post")}
           >
-            <Form
-              id={addPostFormId}
-              title="Add Post"
-              className={styles.createPostForm}
-              onSubmit={handleSubmit(onSubmit)}
-              buttons={
-                <Button type="submit" className={styles.btnAddPost}>
-                  + Add Post
-                </Button>
-              }
-            >
-              <Label htmlFor={titleInputId} className={styles.labelText}>
-                Title:
-              </Label>
-              <Input
-                id={titleInputId}
-                {...register("title")}
-                placeholder="Enter your title"
-                className={styles.postInput}
-              />
-              <Label htmlFor={textareaId} className={styles.labelText}>
-                Content:
-              </Label>
-              <Textarea
-                maxHeight={13}
-                id={textareaId}
-                {...register("body")}
-                placeholder="Enter your post"
-                className={styles.contentArea}
-              />
-            </Form>
+            <Post isAddPost={true} userId={Number(id)} />
           </Accordion>
         </li>
         {posts?.map((post) => (
@@ -159,6 +92,7 @@ function PostList() {
 
             <Button
               className={styles.btnDelete}
+              aria-label="Delete Post"
               onClick={() => handleConfirmationPopup(post.id)}
             >
               Delete Post
