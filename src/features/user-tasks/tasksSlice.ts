@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FIltersFormModel } from "../../components/molecules/filter-tasks/TaskFilters";
 
 export interface TaskModel {
   userId: number;
@@ -7,26 +8,44 @@ export interface TaskModel {
   completed: boolean;
 }
 
-const initialTasksState: TaskModel[] = [];
+interface TasksState {
+  originalTasks: TaskModel[];
+  filterCriteria: FIltersFormModel;
+}
+
+const initialState: TasksState = {
+  originalTasks: [],
+  filterCriteria: {
+    title: "",
+    status: "all",
+    userId: null,
+  },
+};
 
 const tasksSlice = createSlice({
   name: "userTasks",
-  initialState: initialTasksState,
+  initialState,
   reducers: {
-    setTasks: (_state, action: PayloadAction<TaskModel[]>) => action.payload,
+    setTasks: (state, action: PayloadAction<TaskModel[]>) => {
+      state.originalTasks = action.payload;
+    },
     updateTaskStatus(
-      state,
+      { originalTasks },
       action: PayloadAction<{ taskId: number; status: boolean }>
     ) {
       const { taskId, status } = action.payload;
 
-      const taskToUpdate = state.find((task) => task.id === taskId);
+      const taskToUpdate = originalTasks.find((task) => task.id === taskId);
       if (taskToUpdate) {
         taskToUpdate.completed = status;
       }
     },
+    applyFilterCriteria: (state, action: PayloadAction<FIltersFormModel>) => {
+      state.filterCriteria = action.payload;
+    },
   },
 });
 
-export const { setTasks, updateTaskStatus } = tasksSlice.actions;
+export const { setTasks, updateTaskStatus, applyFilterCriteria } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;

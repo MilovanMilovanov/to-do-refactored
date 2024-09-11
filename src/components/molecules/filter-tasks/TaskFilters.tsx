@@ -1,6 +1,8 @@
-import { SetStateAction, useCallback, useEffect } from "react";
+import { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import { RootState } from "../../../store";
 import { useForm } from "react-hook-form";
-import { TaskModel } from "../../../features/user-tasks/tasksSlice";
+import { applyFilterCriteria } from "../../../features/user-tasks/tasksSlice";
 
 import Select from "../../atoms/select/Select";
 import Input from "../../atoms/input/Input";
@@ -10,12 +12,9 @@ import styles from "./TaskFilters.module.scss";
 
 interface FiltersModel {
   userIds: string[];
-  tasks: TaskModel[];
-  statusFilterOptions: string[];
-  setFilteredTasks: React.Dispatch<SetStateAction<TaskModel[]>>;
 }
 
-interface FIltersFormModel {
+export interface FIltersFormModel {
   title: string;
   status: string;
   userId: number | null;
@@ -27,12 +26,15 @@ const initialFormData = {
   userId: null,
 };
 
-function TaskFilters({
-  tasks,
-  userIds,
-  statusFilterOptions,
-  setFilteredTasks,
-}: FiltersModel) {
+const taskStatusOptions: string[] = ["completed", "uncompleted", "all"];
+
+const getUserIds = (state: RootState) => {
+  const userIds = state.userManagement.map((user) => user.id);
+  return { userIds };
+};
+
+function TaskFilters({ userIds }: FiltersModel) {
+  const dispatch = useDispatch();
   const { register, watch } = useForm<FIltersFormModel>({
     values: initialFormData,
     mode: "onChange",
@@ -40,26 +42,9 @@ function TaskFilters({
 
   const { userId, title, status } = watch();
 
-  const filterTasks = useCallback(() => {
-    return tasks.filter((task: TaskModel) => {
-      const statusMatches =
-        !status ||
-        status === "all" ||
-        (status === "completed" && task.completed) ||
-        (status === "uncompleted" && !task.completed);
-
-      const titleMatches =
-        !title || task.title.toLowerCase().includes(title.toLowerCase());
-
-      const userIdMatches = !userId || task.userId === Number(userId);
-
-      return statusMatches && titleMatches && userIdMatches;
-    });
-  }, [status, title, userId, tasks]);
-
   useEffect(() => {
-    setFilteredTasks(filterTasks());
-  }, [filterTasks, setFilteredTasks]);
+    dispatch(applyFilterCriteria({ title, status, userId }));
+  }, [title, status, userId, dispatch]);
 
   return (
     <section className={styles.container}>
@@ -77,7 +62,7 @@ function TaskFilters({
         />
         <Select
           {...register("status")}
-          options={statusFilterOptions}
+          options={taskStatusOptions}
           className={styles.filter}
           filterDefaultText="Filter by status"
         />
@@ -86,4 +71,5 @@ function TaskFilters({
   );
 }
 
-export default TaskFilters;
+const TaskFiltersConnected = connect(getUserIds)(TaskFilters);
+export default TaskFiltersConnected;
