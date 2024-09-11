@@ -3,9 +3,9 @@
 .tooltipError {
   @include flex-layout($justify: center, $align: center);
   grid-area: 1 / 1;
-  transform: translateY(calc(100% + 0.1rem));
+  transform: translateY(calc(100% + 0.2rem));
   width: 100%;
-  height: 2.2rem;
+  height: 2rem;
   color: var(--text-color-default-white);
   background: var(--error-bg-color);
   font-family: "Helvetica Neue-Roman", "sans-serif";
