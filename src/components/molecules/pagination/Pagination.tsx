@@ -1,4 +1,4 @@
-import { Dispatch, useMemo } from "react";
+import { Dispatch, useEffect, useMemo } from "react";
 import { TaskModel } from "../../../features/user-tasks/tasksSlice";
 
 import Button from "../../atoms/button/Button";
@@ -22,6 +22,10 @@ function Pagination({
     () => Math.ceil(tasks.length / pageSize),
     [tasks.length, pageSize]
   );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [totalPages, setCurrentPage]);
 
   const incrementPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
